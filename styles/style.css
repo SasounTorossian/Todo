@@ -45,6 +45,11 @@ body {
   width: 100%;
 }
 
+.project {
+  display: flex;
+  justify-content: space-around;
+}
+
 /* CONTENT MODAL */
 /* .button {
   background: coral;
@@ -216,13 +221,13 @@ body {
   transform: translateX(0%);
 } */
 
-.read-container {
+.readContainer {
   margin: 20px;
   margin-top: 40px;
   font-size: 20px;
 }
 
-#read-input {
+#readInput {
   margin: 7px;
   transform: scale(1.5);
   cursor: pointer;
