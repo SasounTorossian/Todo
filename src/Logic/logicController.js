@@ -16,10 +16,16 @@ const logicController = (() => {
 
     const getProjects = () => projects
 
-    const editProjects = (title, index) => {
+    const editProject = (title, index) => {
         projects[index].title = title //Need to use setter?
 
     }
+
+    const setCurrentProject = (index) => {
+        currentProj = projects[index]
+    }
+
+    const getCurrentProject = () => currentProj
     
     const addTask = (pindex, title, desc, date, priority, notes) => {
         projects[pindex].tasks.push(taskFactory(title, desc, date, priority, notes))
@@ -43,7 +49,9 @@ const logicController = (() => {
         addProject,
         removeProject,
         getProjects,
-        editProjects,
+        editProject,
+        setCurrentProject,
+        getCurrentProject,
         addTask,
         removeTask,
         editTask
