@@ -29,6 +29,8 @@ const logicController = (() => {
         projects[pindex].tasks.splice(tindex, 1)
     }
 
+    // Get tasks
+
     const editTask = (pindex, tindex, title, desc, date, priority, notes) => {
         projects[pindex].tasks[tindex].title = title
         projects[pindex].tasks[tindex].desc = desc
