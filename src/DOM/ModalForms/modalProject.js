@@ -1,6 +1,6 @@
 
 const EventEmitter = require("events")
-const emitter = new EventEmitter
+const emitterProj = new EventEmitter
 
 const renderModalProject = (() => {
     // Get modal element
@@ -42,12 +42,7 @@ const renderModalProject = (() => {
     // Function to submit modal form and create new book
     function submitModalProj(){
         let title = document.querySelector("#title-input-proj").value
-        console.log(title)
-        if (!title) return
-        // let book = new Book(title, author, pages, read)
-        // addBookToLibrary(book)
-        // render()
-        emitter.emit("tester", title)
+        emitterProj.emit("submitproj", title)
         closeModalProj()
     }
 
@@ -56,5 +51,5 @@ const renderModalProject = (() => {
 
 export {
     renderModalProject,
-    emitter
+    emitterProj
 }

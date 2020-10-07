@@ -1,5 +1,5 @@
 import {renderModalProject} from "./ModalForms/modalProject"
-import {emitter} from "./ModalForms/modalProject"
+import {emitterProj} from "./ModalForms/modalProject"
 import {renderModalTask} from "./ModalForms/modalTask"
 import {logicController} from "../Logic/logicController"
 
@@ -16,7 +16,7 @@ const domController = (() => {
         renderModalProject.openModalProj()
     }
 
-    emitter.on("tester", function(title) {
+    emitterProj.on("tester", function(title) {
         console.log(title)
     })
 
