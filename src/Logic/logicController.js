@@ -14,6 +14,8 @@ const logicController = (() => {
         projects.splice(index, 1)
     }
 
+    const getProjects = () => projects
+
     const editProjects = (title, index) => {
         projects[index].title = title //Need to use setter?
 
@@ -38,6 +40,7 @@ const logicController = (() => {
     return {
         addProject,
         removeProject,
+        getProjects,
         editProjects,
         addTask,
         removeTask,
