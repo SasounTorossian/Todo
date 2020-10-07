@@ -14,10 +14,10 @@
 
     <div id="content">
       <div class="subContent" id="contentProj">
-        <button class="modalBtn" id="modalBtnProj">Click Here (Project)</button>
+        <button class="openBtn" id="modalBtnProj">Click Here (Project)</button>
       </div>
       <div class="subContent" id="contentTask">
-        <button class="modalBtn" id="modalBtnTask">Click Here (Task)</button>
+        <button class="openBtn" id="modalBtnTask">Click Here (Task)</button>
       </div>
       <div class="subContent" id="contentTaskDetail"></div>
     </div>
@@ -30,19 +30,19 @@
 
     <div class="modal" id="modalProj" > 
       <div class="modalContent">
-        <span class="modalTitle disable-select">Add a Project</span>
-        <span class="closeBtn disable-select" id="closeBtnProj">&times;</span>
+        <span class="modalTitle disableSelect">Add a Project</span>
+        <span class="closeBtn disableSelect" id="closeBtnProj">&times;</span>
 
         <form class="modalFormProj"> 
-          <div class="form-container" id="title-form">
-            <input type=text name="title" class="input-container" id="title-input-proj" autocomplete="off" required>
-            <label for="title" class="label-container" id="title-label">
-              <span class="span-container" id="title-span">Title</span>
+          <div class="form-container" id="titleForm">
+            <input type=text name="title" class="inputContainer" id="titleInputProj" autocomplete="off" required>
+            <label for="title" class="labelContainer" id="titleLabel">
+              <span class="spanContainer" id="titleSpan">Title</span>
             </label>
           </div>
 
-          <div class="submit-container" id="submit-form">
-            <button type="submit" class="submit-button disable-select" id="submitBtnProj">Submit</button>
+          <div class="submitContainer" id="submitForm">
+            <button type="submit" class="submitButton disableSelect" id="submitBtnProj">Submit</button>
           </div>
         </form>
       </div>
@@ -50,52 +50,52 @@
 
     <div class="modal" id="modalTask" > 
         <div class="modalContent">
-          <span class="modalTitle disable-select">Add a Task</span>
-          <span class="closeBtn disable-select" id="closeBtnTask">&times;</span>
+          <span class="modalTitle disableSelect">Add a Task</span>
+          <span class="closeBtn disableSelect" id="closeBtnTask">&times;</span>
   
           <form class="modalFormTask"> 
-            <div class="form-container" id="title-form">
-              <input type=text name="title" class="input-container" id="title-input-task" autocomplete="off" required>
-              <label for="title" class="label-container" id="title-label">
-                <span class="span-container" id="title-span">Title</span>
+            <div class="formContainer" id="titleForm">
+              <input type=text name="title" class="inputContainer" id="titleInputTask" autocomplete="off" required>
+              <label for="title" class="labelContainer" id="titleLabel">
+                <span class="spanContainer" id="titleSpan">Title</span>
               </label>
             </div>
   
-            <div class="form-container" id="desc-form">
-              <input type=text name="desc" class="input-container" id="desc-input" autocomplete="off" required>
-              <label for="desc" class="label-container" id="title-label">
-                <span class="span-container" id="desc-span">Description</span>
+            <div class="formContainer" id="desc-form">
+              <input type=text name="desc" class="inputContainer" id="descInput" autocomplete="off" required>
+              <label for="desc" class="labelContainer" id="titleLabel">
+                <span class="spanContainer" id="descSpan">Description</span>
               </label>
             </div>
   
-            <div class="form-container" id="date-form">
-              <input type=date name="date" class="input-container" id="date-input" autocomplete="off" required>
-              <label for="date" class="label-container" id="date-label">
-                <span class="span-container" id="date-span">Due Date</span>
+            <div class="formContainer" id="dateForm">
+              <input type=date name="date" class="inputContainer" id="date-input" autocomplete="off" required>
+              <label for="date" class="labelContainer" id="dateLabel">
+                <span class="spanContainer" id="dateSpan">Due Date</span>
               </label>
             </div>
 
-            <div class="form-container" id="priority-form">
-              <input type=radio name="priority" class="input-container" id="priority-input" value="1" autocomplete="off" required>
-              <label for="priority" class="label-container" id="priority-label">Low</label>
-              <input type=radio name="priority" class="input-container" id="priority-input" value="2" autocomplete="off" required>
-              <label for="priority" class="label-container" id="priorit y-label">Medium</label>
-              <input type=radio name="priority" class="input-container" id="priority-input" value="3" autocomplete="off" required>
-              <label for="priority" class="label-container" id="priority-label">High</label>
-              <label for="date" class="label-container" id="date-label">
-                <span class="span-container" id="priority-span">Priority</span>
+            <div class="formContainer" id="priorityForm">
+              <input type=radio name="priority" class="inputContainer" id="priorityInput" value="1" autocomplete="off" required>
+              <label for="priority" class="labelContainer" id="priorityLabel">Low</label>
+              <input type=radio name="priority" class="inputContainer" id="priorityInput" value="2" autocomplete="off" required>
+              <label for="priority" class="labelContainer" id="priorityLabel">Medium</label>
+              <input type=radio name="priority" class="inputContainer" id="priorityInput" value="3" autocomplete="off" required>
+              <label for="priority" class="labelContainer" id="priorityLabel">High</label>
+              <label for="date" class="labelContainer" id="dateLabel">
+                <span class="spanContainer" id="prioritySpan">Priority</span>
               </label>
             </div>
       
-            <div class="form-container" id="notes-form">
-              <textarea name="notes" class="input-container" id="notes-input"></textarea>
-              <label for="notes" class="label-container" id="notes-label">
-                <span class="span-container" id="notes-span">Notes</span>
+            <div class="formContainer" id="notesForm">
+              <textarea name="notes" class="inputContainer" id="notesInput"></textarea>
+              <label for="notes" class="labelContainer" id="notesLabel">
+                <span class="spanContainer" id="notesSpan">Notes</span>
               </label>
             </div>
   
-            <div class="submit-container" id="submit-form">
-              <button type="submit" class="submit-button disable-select" id="submitBtnTask">Submit</button>
+            <div class="submitContainer" id="submitForm">
+              <button type="submit" class="submitButton disableSelect" id="submitBtnTask">Submit</button>
             </div>
           </form>
         </div>

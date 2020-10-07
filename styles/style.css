@@ -31,12 +31,12 @@ body {
 }
 
 #contentProj {
-  background: rgb(217, 0, 18);
+  background: white;
   width: 100%;
 }
 
 #contentTask {
-  background: rgb(0, 51, 160);
+  background: gray;
   width: 100%;
 }
 
@@ -228,21 +228,12 @@ body {
   cursor: pointer;
 }
 
-#pages-input {
-  margin-bottom: 2px;
-}
-
-#pages-input::-webkit-outer-spin-button,
-#pages-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-
-.submit-container {
+.submitContainer {
   text-align: center;
   margin: 20px;
 }
 
-.submit-button {
+.submitButton {
   font-size: 20px;
   color: black;
   text-align: center;
@@ -253,7 +244,7 @@ body {
   cursor: pointer;
 }
 
-.submit-button:hover {
+.submitButton:hover {
 transform: scale(1.1);
 background: black;
 color: white;
