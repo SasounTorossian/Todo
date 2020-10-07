@@ -1,0 +1,260 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    background-color: white;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+/* CONTENT TEST */
+#content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}
+
+#contentProj {
+  background: rgb(217, 0, 18);
+  width: 100%;
+}
+
+#contentTask {
+  background: rgb(0, 51, 160);
+  width: 100%;
+}
+
+#contentTaskDetail {
+  background: rgb(242, 168, 0);
+  width: 100%;
+}
+
+/* CONTENT MODAL */
+/* .button {
+  background: coral;
+  padding: 1em 2em;
+  color: #fff;
+  border: 0;
+}
+
+.button:hover {
+  background: #333;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #f4f4f4;
+  margin: 20% auto;
+  padding: 20px;
+  width: 70%;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+}
+
+.closeBtn {
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+}
+
+.closeBtn:hover, .closeBtn:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+} */
+
+
+
+/* FOOTER */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+  
+  .footer p {
+    font-weight: 500;
+    font-size: 25px;
+  }
+  
+  .footer img {
+    transition: all 0.2s ease;
+  }
+  
+  .footer img:hover {
+    transform: scale(1.1);
+  }
+
+  /* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.modalContent { 
+  position: absolute;
+  background-color: white;
+  margin: auto;
+  padding: 1px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  border: 1.5px solid black;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+}
+
+.closeBtn {
+  line-height: 0.7em ; 
+  color:black;
+  float: right;
+  font-size: 40px;
+  margin: 15px;
+  transition: all 0.3s ease;
+}
+
+.closeBtn:hover, .closeBtn:focus {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.form-container {
+  position: relative;
+  width: 90%;
+  height: 50%;
+  overflow: hidden;
+  margin: 20px;
+}
+
+/* .input-container {
+  width: 100%;
+  height: 100%;
+  color: black;
+  padding-top: 20px;
+  border: none;
+  outline: none;
+  font-size: 25px;
+} */
+
+/* .label-container {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  font-size: 20px;
+  border-bottom: 0.5px solid gray;
+} */
+
+/* .label-container::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  height: 100%;
+  width: 100%;
+  border-bottom: 2px solid black;
+  transform: translateX(-101%);
+  transition: all 0.3s ease;
+}
+
+.span-container {
+  position: absolute;
+  bottom: 1px;
+  left: 0px;
+  transition: all 0.3s ease;
+}
+
+.input-container:focus + .label-container .span-container, 
+.input-container:valid + .label-container .span-container{
+  transform: translateY(-100%);
+  left: 0px;
+  font-size: 16px;
+  color: gray;
+}
+
+.input-container:focus + .label-container::after, 
+.input-container:valid + .label-container::after {
+  transform: translateX(0%);
+} */
+
+.read-container {
+  margin: 20px;
+  margin-top: 40px;
+  font-size: 20px;
+}
+
+#read-input {
+  margin: 7px;
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+#pages-input {
+  margin-bottom: 2px;
+}
+
+#pages-input::-webkit-outer-spin-button,
+#pages-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.submit-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.submit-button {
+  font-size: 20px;
+  color: black;
+  text-align: center;
+  background: white;
+  border: 1.5px solid black;
+  padding: 0.5em 1em;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+transform: scale(1.1);
+background: black;
+color: white;
+}
