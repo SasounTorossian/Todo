@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h1 class="projectTitle">myTodo</h1>
+    </div>
+
+    <div id="content">
+      <div class="subContent" id="contentProj">
+        <button class="modalBtn" id="modalBtnProj">Click Here (Project)</button>
+      </div>
+      <div class="subContent" id="contentTask">
+        <button class="modalBtn" id="modalBtnTask">Click Here (Task)</button>
+      </div>
+      <div class="subContent" id="contentTaskDetail"></div>
+    </div>
+
+    <div class="footer">
+        <p>A project by Sasoun Torossian. 2020</p>
+        <a id="gitLink" href="https://github.com/SasounTorossian">
+          <img alt="Github" src="./images/git-logo.png" height="60px"></a>
+    </div>
+
+    <div class="modal" id="modalProj" > 
+      <div class="modalContent">
+        <span class="modalTitle disable-select">Add a Project</span>
+        <span class="closeBtn disable-select" id="closeBtnProj">&times;</span>
+
+        <form class="modalFormProj"> 
+          <div class="form-container" id="title-form">
+            <input type=text name="title" class="input-container" id="title-input-proj" autocomplete="off" required>
+            <label for="title" class="label-container" id="title-label">
+              <span class="span-container" id="title-span">Title</span>
+            </label>
+          </div>
+
+          <div class="submit-container" id="submit-form">
+            <button type="submit" class="submit-button disable-select" id="submitBtnProj">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="modalTask" > 
+        <div class="modalContent">
+          <span class="modalTitle disable-select">Add a Task</span>
+          <span class="closeBtn disable-select" id="closeBtnTask">&times;</span>
+  
+          <form class="modalFormTask"> 
+            <div class="form-container" id="title-form">
+              <input type=text name="title" class="input-container" id="title-input-task" autocomplete="off" required>
+              <label for="title" class="label-container" id="title-label">
+                <span class="span-container" id="title-span">Title</span>
+              </label>
+            </div>
+  
+            <div class="form-container" id="desc-form">
+              <input type=text name="desc" class="input-container" id="desc-input" autocomplete="off" required>
+              <label for="desc" class="label-container" id="title-label">
+                <span class="span-container" id="desc-span">Description</span>
+              </label>
+            </div>
+  
+            <div class="form-container" id="date-form">
+              <input type=date name="date" class="input-container" id="date-input" autocomplete="off" required>
+              <label for="date" class="label-container" id="date-label">
+                <span class="span-container" id="date-span">Due Date</span>
+              </label>
+            </div>
+
+            <div class="form-container" id="priority-form">
+              <input type=radio name="priority" class="input-container" id="priority-input" value="1" autocomplete="off" required>
+              <label for="priority" class="label-container" id="priority-label">Low</label>
+              <input type=radio name="priority" class="input-container" id="priority-input" value="2" autocomplete="off" required>
+              <label for="priority" class="label-container" id="priorit y-label">Medium</label>
+              <input type=radio name="priority" class="input-container" id="priority-input" value="3" autocomplete="off" required>
+              <label for="priority" class="label-container" id="priority-label">High</label>
+              <label for="date" class="label-container" id="date-label">
+                <span class="span-container" id="priority-span">Priority</span>
+              </label>
+            </div>
+      
+            <div class="form-container" id="notes-form">
+              <textarea name="notes" class="input-container" id="notes-input"></textarea>
+              <label for="notes" class="label-container" id="notes-label">
+                <span class="span-container" id="notes-span">Notes</span>
+              </label>
+            </div>
+  
+            <div class="submit-container" id="submit-form">
+              <button type="submit" class="submit-button disable-select" id="submitBtnTask">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
