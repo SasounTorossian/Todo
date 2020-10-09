@@ -3,10 +3,12 @@ import {taskFactory} from "./factory"
 
 const logicController = (() => {
     let projects = []
-    let currentProj
-    let currentTask
+    let currentProj = null
+    let currentTask = null
 
     const addProject = (title) => {
+        // const project = projectFactory(title)
+        // console.log(project.tasks)
         projects.push(projectFactory(title))
     }
 
@@ -18,14 +20,13 @@ const logicController = (() => {
 
     const editProject = (title, index) => {
         projects[index].title = title //Need to use setter?
-
     }
 
-    const setCurrentProject = (index) => {
-        currentProj = projects[index]
-    }
+    const setCurrentProject = (index) => currentProj = projects[index]
 
     const getCurrentProject = () => currentProj
+
+    const getCurrentProjectIndex = () => projects.findIndex(p => p == currentProj)
     
     const addTask = (pindex, title, desc, date, priority, notes) => {
         projects[pindex].tasks.push(taskFactory(title, desc, date, priority, notes))
@@ -35,7 +36,10 @@ const logicController = (() => {
         projects[pindex].tasks.splice(tindex, 1)
     }
 
-    // Get tasks
+    const getTasks = () => {
+        if(!currentProj) return
+        return  currentProj.tasks
+    }
 
     const editTask = (pindex, tindex, title, desc, date, priority, notes) => {
         projects[pindex].tasks[tindex].title = title
@@ -45,6 +49,12 @@ const logicController = (() => {
         projects[pindex].tasks[tindex].priority = priority
     }
 
+    const setCurrentTask = (index) => currentTask = currentProj.tasks[index]
+
+    const getCurrentTask = () => currentTask
+
+    const getCurrentTaskIndex = () => currentProj.tasks.findIndex(p => p == currentTask)
+
     return {
         addProject,
         removeProject,
@@ -52,9 +62,14 @@ const logicController = (() => {
         editProject,
         setCurrentProject,
         getCurrentProject,
+        getCurrentProjectIndex,
         addTask,
         removeTask,
-        editTask
+        getTasks,
+        editTask,
+        setCurrentTask,
+        getCurrentTask,
+        getCurrentTaskIndex
     }
 })()
 

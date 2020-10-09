@@ -1,6 +1,6 @@
 const projectFactory = (title) => {
     let tasks = []
-    return {title}
+    return {title, tasks}
 }
 
 const taskFactory = (title, desc, date, priority, notes) => {

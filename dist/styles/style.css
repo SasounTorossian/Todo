@@ -50,6 +50,11 @@ body {
   justify-content: space-around;
 }
 
+.task {
+  display: flex;
+  justify-content: space-around;
+}
+
 /* CONTENT MODAL */
 /* .button {
   background: coral;
