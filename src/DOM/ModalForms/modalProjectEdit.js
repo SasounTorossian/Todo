@@ -6,7 +6,7 @@ const renderModalProjectEdit = (() => {
     // Get modal element
     const modalProjEdit = document.querySelector("#modalProjEdit")
     // Get modal form 
-    const modalFormProjEdit = document.querySelector(".modalFormProjEdit")
+    const modalFormProjEdit = document.querySelector("#modalFormProjEdit")
     // Get open button 
     // const openBtnProjEdit = document.querySelector(".editProject")
     // Get close button

@@ -6,7 +6,7 @@ const renderModalProject = (() => {
     // Get modal element
     const modalProj = document.querySelector("#modalProj")
     // Get modal form 
-    const modalFormProj = document.querySelector(".modalFormProj")
+    const modalFormProj = document.querySelector("#modalFormProj")
     // Get open button 
     const openBtnProj = document.querySelector("#modalBtnProj")
     // Get close button

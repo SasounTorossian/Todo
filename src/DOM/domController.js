@@ -4,6 +4,8 @@ import {renderModalProjectEdit} from "./ModalForms/modalProjectEdit"
 import {emitterProjEdit} from "./ModalForms/modalProjectEdit"
 import {renderModalTask} from "./ModalForms/modalTask"
 import {emitterTask} from "./ModalForms/modalTask"
+import {renderModalTaskEdit} from "./ModalForms/modalTaskEdit"
+import {emitterTaskEdit} from "./ModalForms/modalTaskEdit"
 import {logicController} from "../Logic/logicController"
 
 //TODO: set curent project at start. 
@@ -11,11 +13,6 @@ import {logicController} from "../Logic/logicController"
 const domController = (() => {
     const contentProj = document.querySelector("#contentProj")
     const contentTask = document.querySelector("#contentTask")
-
-    // const addProjBtn = document.querySelector("#modalBtnProj")
-    // const addTaskBtn = document.querySelector("#modalBtnTask")
-    // addProjBtn.style.display = "none"
-    // addTaskBtn.style.display = "none"
 
     const testRenderProjects = () => {
         logicController.addProject("A")
@@ -52,6 +49,20 @@ const domController = (() => {
         renderTasks()
     })
 
+    emitterProjEdit.on("submitProjEdit", (title) => {
+        const currentProjIndex = logicController.getCurrentProjectIndex() 
+        logicController.editProject(title, currentProjIndex)
+        renderProjects()
+    })
+
+    emitterTaskEdit.on("submitTaskEdit", (title, desc, date, priority, notes) => {
+        const currentProjIndex = logicController.getCurrentProjectIndex() 
+        const currentTaskIndex = logicController.getCurrentTaskIndex()
+        logicController.editTask(currentProjIndex, currentTaskIndex, title, desc, date, priority, notes)
+        renderTasks()
+    })
+
+
     const removeAllProjects = () => {
         const divProj = document.querySelectorAll(".project")
         divProj.forEach(p =>  p.remove())
@@ -83,20 +94,6 @@ const domController = (() => {
         const currentProjIndex = logicController.getCurrentProjectIndex()
         logicController.removeTask(currentProjIndex, index)
         renderTasks()
-    }
-
-    emitterProjEdit.on("submitProjEdit", (title) => {
-        const currentProjIndex = logicController.getCurrentProjectIndex() 
-        logicController.editProject(title, currentProjIndex)
-        renderProjects()
-    })
-
-    const editTask = (index) => {
-        // renderModalProjectEdit.openModalProjEdit()
-        // emitterProjEdit.once("submitProjEdit", (title) => { 
-        //     logicController.editProject(title, index)
-        //     renderProjects()
-        // })
     }
 
     const renderProjects = () => {
@@ -151,7 +148,7 @@ const domController = (() => {
             const editTask = document.createElement("div")
             editTask.classList.add("editTask")
             editTask.innerText = "edit"
-            editTask.addEventListener("click", () => editTask(index))
+            editTask.addEventListener("click", () => renderModalTaskEdit.openModalTaskEdit())
             containerTask.appendChild(editTask)
 
             const delTask = document.createElement("div")

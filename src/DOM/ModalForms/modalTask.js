@@ -5,7 +5,7 @@ const renderModalTask = (() => {
     // Get modal element
     const modalTask = document.querySelector("#modalTask")
     // Get modal form 
-    const modalFormTask = document.querySelector(".modalFormTask")
+    const modalFormTask = document.querySelector("#modalFormTask")
     // Get open button 
     const openBtnTask = document.querySelector("#modalBtnTask")
     // Get close button
