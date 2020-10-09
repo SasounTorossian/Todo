@@ -3,24 +3,26 @@ import {emitterProj} from "./ModalForms/modalProject"
 import {renderModalProjectEdit} from "./ModalForms/modalProjectEdit"
 import {emitterProjEdit} from "./ModalForms/modalProjectEdit"
 import {renderModalTask} from "./ModalForms/modalTask"
+import {emitterTask} from "./ModalForms/modalTask"
 import {logicController} from "../Logic/logicController"
 
+//TODO: set curent project at start. 
 
 const domController = (() => {
     const contentProj = document.querySelector("#contentProj")
     const contentTask = document.querySelector("#contentTask")
 
-    const addProjBtn = document.querySelector("#modalBtnProj")
-    const addTaskBtn = document.querySelector("#modalBtnTask")
-    addProjBtn.style.display = "none"
-    addTaskBtn.style.display = "none"
+    // const addProjBtn = document.querySelector("#modalBtnProj")
+    // const addTaskBtn = document.querySelector("#modalBtnTask")
+    // addProjBtn.style.display = "none"
+    // addTaskBtn.style.display = "none"
 
     const testRenderProjects = () => {
         logicController.addProject("A")
         logicController.addProject("B")
         logicController.addProject("C")
         renderProjects()
-        addProjBtn.style.display = "block"
+        // addProjBtn.style.display = "block"
     }
 
     const testAddTask = () => {
@@ -34,26 +36,39 @@ const domController = (() => {
         // testRenderTasks()
         // renderProjects()
         renderTasks()
-        addProjBtn.addEventListener("click", addProject)
-        addTaskBtn.addEventListener("click", testAddTask)
+        // addProjBtn.addEventListener("click", addProject)
+        // addTaskBtn.addEventListener("click", addTask)
     }
 
-    const addProject = () => {
-        renderModalProject.openModalProj()
-        emitterProj.once("submitProj", (title) => {
-            logicController.addProject(title)
-            renderProjects()
-        })
-    }
+    // const addProject = () => {
+    //     renderModalProject.openModalProj()
+    //     emitterProj.once("submitProj", (title) => {
+    //         logicController.addProject(title)
+    //         renderProjects()
+    //     })
+    // }
 
-    const addTask = () => {
-        // const currentProject = logicController.getCurrentProject()
-        // renderModalProject.openModalProj()
-        // emitterProj.once("submitProj", (title) => {
-        //     logicController.addProject(title)
-        //     renderProjects()
-        // })
-    }
+    emitterProj.on("submitProj", (title) => {
+        logicController.addProject(title)
+        renderProjects()
+    })
+
+    // const addTask = () => {
+    //     const currentProjIndex = logicController.getCurrentProjectIndex()
+    //     renderModalTask.openModalTask()
+    //     emitterTask.once("submitTask", (title, desc, date, priority, notes) => {
+    //         logicController.addTask(currentProjIndex, title, desc, date, priority, notes)
+    //         renderTasks()
+    //     })
+        
+    // }
+
+    
+    emitterTask.on("submitTask", (title, desc, date, priority, notes) => {
+        const currentProjIndex = logicController.getCurrentProjectIndex()
+        logicController.addTask(currentProjIndex, title, desc, date, priority, notes)
+        renderTasks()
+    })
 
     const removeAllProjects = () => {
         const divProj = document.querySelectorAll(".project")
@@ -67,7 +82,6 @@ const domController = (() => {
 
     const setProject = (index) => {
         logicController.setCurrentProject(index)
-        addTaskBtn.style.display = "block"
         renderTasks()
     }
 
@@ -88,13 +102,19 @@ const domController = (() => {
         renderTasks()
     }
 
-    const editProject = (index) => {
-        renderModalProjectEdit.openModalProjEdit()
-        emitterProjEdit.once("submitProjEdit", (title) => { 
-            logicController.editProject(title, index)
-            renderProjects()
-        })
-    }
+    // const editProject = (index) => {
+    //     renderModalProjectEdit.openModalProjEdit()
+    //     emitterProjEdit.once("submitProjEdit", (title) => { 
+    //         logicController.editProject(title, index)
+    //         renderProjects()
+    //     })
+    // }
+
+    emitterProjEdit.on("submitProjEdit", (title) => {
+        const currentProjIndex = logicController.getCurrentProjectIndex() 
+        logicController.editProject(title, currentProjIndex)
+        renderProjects()
+    })
 
     const editTask = (index) => {
         // renderModalProjectEdit.openModalProjEdit()
@@ -122,14 +142,14 @@ const domController = (() => {
             const editProj = document.createElement("div")
             editProj.classList.add("editProject")
             editProj.innerText = "edit"
-            editProj.addEventListener("click", () => editProject(index))
+            editProj.addEventListener("click", () => renderModalProjectEdit.openModalProjEdit())
             containerProj.appendChild(editProj)
 
-            const deleteProj = document.createElement("div")
-            deleteProj.classList.add("deleteProject")
-            deleteProj.innerText = "delete"
-            deleteProj.addEventListener("click", () => deleteProject(index))
-            containerProj.appendChild(deleteProj)
+            const delProj = document.createElement("div")
+            delProj.classList.add("deleteProject")
+            delProj.innerText = "delete"
+            delProj.addEventListener("click", () => deleteProject(index))
+            containerProj.appendChild(delProj)
 
             contentProj.appendChild(containerProj)
         })
@@ -145,12 +165,13 @@ const domController = (() => {
             containerTask.classList.add("task")
             containerTask.addEventListener("click", () => setTask(index))
 
+            // TODO: Task colour based on priority
             const titleTask = document.createElement("div")
             titleTask.classList.add("titleTask")
             titleTask.innerText = task.title
             containerTask.appendChild(titleTask)
 
-            // Task description.
+            // TODO: Task description.
 
             const editTask = document.createElement("div")
             editTask.classList.add("editTask")
@@ -158,11 +179,11 @@ const domController = (() => {
             editTask.addEventListener("click", () => editTask(index))
             containerTask.appendChild(editTask)
 
-            const deleteTask = document.createElement("div")
-            deleteTask.classList.add("deleteTask")
-            deleteTask.innerText = "delete"
-            deleteTask.addEventListener("click", () => deleteTask(index))
-            containerTask.appendChild(deleteTask)
+            const delTask = document.createElement("div")
+            delTask.classList.add("deleteTask")
+            delTask.innerText = "delete"
+            delTask.addEventListener("click", () => deleteTask(index))
+            containerTask.appendChild(delTask)
 
             contentTask.appendChild(containerTask)
         })

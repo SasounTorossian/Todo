@@ -7,11 +7,15 @@ const renderModalProjectEdit = (() => {
     const modalProjEdit = document.querySelector("#modalProjEdit")
     // Get modal form 
     const modalFormProjEdit = document.querySelector(".modalFormProjEdit")
+    // Get open button 
+    // const openBtnProjEdit = document.querySelector(".editProject")
     // Get close button
     const closeBtnProjEdit = document.querySelector("#closeBtnProjEdit")
     // Get modal submit button
     const submitBtnProjEdit = document.querySelector("#submitBtnProjEdit")
 
+    // Listen for open click 
+    // openBtnProjEdit.addEventListener("click", openModalProjEdit)
     // Listen for close click 
     closeBtnProjEdit.addEventListener("click", closeModalProjEdit)
     // Listen for outside click

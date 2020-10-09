@@ -1,4 +1,7 @@
-const renderModalTask = () => {
+const EventEmitter = require("events")
+const emitterTask = new EventEmitter
+
+const renderModalTask = (() => {
     // Get modal element
     const modalTask = document.querySelector("#modalTask")
     // Get modal form 
@@ -37,24 +40,19 @@ const renderModalTask = () => {
 
     // Function to submit modal form and create new book
     function submitModalTask(){
-        let title = document.querySelector("#title-input-task").value
-        let desc = document.querySelector("#desc-input").value
-        let date = document.querySelector("#date-input").value
+        let title = document.querySelector("#titleInputTask").value
+        let desc = document.querySelector("#descInput").value
+        let date = document.querySelector("#dateInput").value
         let priority = document.querySelector("input[name='priority']:checked").value
-        let notes = document.querySelector("#notes-input").value
-        console.log(title)
-        console.log(desc)
-        console.log(date)
-        console.log(priority)
-        console.log(notes)
-        if (!title || !desc || !date || !priority) return
-        // let book = new Book(title, author, pages, read)
-        // addBookToLibrary(book)
-        // render()
+        let notes = document.querySelector("#notesInput").value
+        emitterTask.emit("submitTask", title, desc, date, priority, notes)
         closeModalTask()
     }
-}
+
+    return {openModalTask}
+})()
 
 export {
-    renderModalTask
+    renderModalTask,
+    emitterTask
 }
