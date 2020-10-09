@@ -36,34 +36,16 @@ const domController = (() => {
         // testRenderTasks()
         // renderProjects()
         renderTasks()
+        renderModalTask.hideOpenTaskBtn()
         // addProjBtn.addEventListener("click", addProject)
         // addTaskBtn.addEventListener("click", addTask)
     }
-
-    // const addProject = () => {
-    //     renderModalProject.openModalProj()
-    //     emitterProj.once("submitProj", (title) => {
-    //         logicController.addProject(title)
-    //         renderProjects()
-    //     })
-    // }
 
     emitterProj.on("submitProj", (title) => {
         logicController.addProject(title)
         renderProjects()
     })
 
-    // const addTask = () => {
-    //     const currentProjIndex = logicController.getCurrentProjectIndex()
-    //     renderModalTask.openModalTask()
-    //     emitterTask.once("submitTask", (title, desc, date, priority, notes) => {
-    //         logicController.addTask(currentProjIndex, title, desc, date, priority, notes)
-    //         renderTasks()
-    //     })
-        
-    // }
-
-    
     emitterTask.on("submitTask", (title, desc, date, priority, notes) => {
         const currentProjIndex = logicController.getCurrentProjectIndex()
         logicController.addTask(currentProjIndex, title, desc, date, priority, notes)
@@ -82,6 +64,7 @@ const domController = (() => {
 
     const setProject = (index) => {
         logicController.setCurrentProject(index)
+        renderModalTask.showOpenTaskBtn()
         renderTasks()
     }
 
@@ -101,14 +84,6 @@ const domController = (() => {
         logicController.removeTask(currentProjIndex, index)
         renderTasks()
     }
-
-    // const editProject = (index) => {
-    //     renderModalProjectEdit.openModalProjEdit()
-    //     emitterProjEdit.once("submitProjEdit", (title) => { 
-    //         logicController.editProject(title, index)
-    //         renderProjects()
-    //     })
-    // }
 
     emitterProjEdit.on("submitProjEdit", (title) => {
         const currentProjIndex = logicController.getCurrentProjectIndex() 

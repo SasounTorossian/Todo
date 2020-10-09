@@ -22,6 +22,14 @@ const renderModalTask = (() => {
     // Listen for submit click
     submitBtnTask.addEventListener("click", submitModalTask)
 
+    function hideOpenTaskBtn() {
+        openBtnTask.style.display = "none"
+    }
+
+    function showOpenTaskBtn() {
+        openBtnTask.style.display = "block"
+    }
+
     // Function to open modal
     function openModalTask() {
         modalTask.style.display = "block"
@@ -49,7 +57,9 @@ const renderModalTask = (() => {
         closeModalTask()
     }
 
-    return {openModalTask}
+    return {hideOpenTaskBtn,
+            showOpenTaskBtn,
+            openModalTask}
 })()
 
 export {
