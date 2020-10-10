@@ -1,68 +1,68 @@
 const EventEmitter = require("events")
 const emitterTask = new EventEmitter
 
-const renderModalTask = (() => {
+const modalTask = (() => {
     // Get modal element
-    const modalTask = document.querySelector("#modalTask")
+    const modal = document.querySelector("#modalTask")
     // Get modal form 
-    const modalFormTask = document.querySelector("#modalFormTask")
+    const modalForm = document.querySelector("#modalFormTask")
     // Get open button 
-    const openBtnTask = document.querySelector("#modalBtnTask")
+    const openBtn = document.querySelector("#modalBtnTask")
     // Get close button
-    const closeBtnTask = document.querySelector("#closeBtnTask")
+    const closeBtn = document.querySelector("#closeBtnTask")
     // Get modal submit button
-    const submitBtnTask = document.querySelector("#submitBtnTask")
+    const submitBtn = document.querySelector("#submitBtnTask")
 
     // Listen for open click 
-    openBtnTask.addEventListener("click", openModalTask)
+    openBtn.addEventListener("click", openModal)
     // Listen for close click 
-    closeBtnTask.addEventListener("click", closeModalTask)
+    closeBtn.addEventListener("click", closeModal)
     // Listen for outside click
-    window.addEventListener("click", outsideClickTask)
+    window.addEventListener("click", outsideClick)
     // Listen for submit click
-    submitBtnTask.addEventListener("click", submitModalTask)
+    submitBtn.addEventListener("click", submitModal)
 
     function hideOpenTaskBtn() {
-        openBtnTask.style.display = "none"
+        openBtn.style.display = "none"
     }
 
     function showOpenTaskBtn() {
-        openBtnTask.style.display = "block"
+        openBtn.style.display = "block"
     }
 
     // Function to open modal
-    function openModalTask() {
-        modalTask.style.display = "block"
+    function openModal() {
+        modal.style.display = "block"
     } 
 
     // Function to close modal
-    function closeModalTask(){
-        modalTask.style.display = "none"
-        modalFormTask.reset()
+    function closeModal(){
+        modal.style.display = "none"
+        modalForm.reset()
     }
 
     // Function to close modal if outside click 
-    function outsideClickTask(e) {
-        if(e.target == modalTask) closeModalTask()
+    function outsideClick(e) {
+        if(e.target == modal) closeModal()
     }
 
     // Function to submit modal form and create new book
-    function submitModalTask(){
+    function submitModal(){
         let title = document.querySelector("#titleInputTask").value
-        let desc = document.querySelector("#descInput").value
-        let date = document.querySelector("#dateInput").value
-        let priority = document.querySelector("input[name='priority']:checked").value
-        let notes = document.querySelector("#notesInput").value
+        let desc = document.querySelector("#descInputTask").value
+        let date = document.querySelector("#dateInputTask").value
+        let priority = document.querySelector("input[name='priorityTask']:checked").value
+        let notes = document.querySelector("#notesInputTask").value
         emitterTask.emit("submitTask", title, desc, date, priority, notes)
-        closeModalTask()
+        closeModal()
     }
 
     return {hideOpenTaskBtn,
             showOpenTaskBtn,
-            openModalTask}
+            openModal}
 })()
 
 export {
-    renderModalTask,
+    modalTask,
     emitterTask
 }

@@ -1,55 +1,54 @@
-
 const EventEmitter = require("events")
 const emitterProjEdit = new EventEmitter
 
-const renderModalProjectEdit = (() => {
+const modalProjectEdit = (() => {
     // Get modal element
-    const modalProjEdit = document.querySelector("#modalProjEdit")
+    const modalEdit = document.querySelector("#modalProjEdit")
     // Get modal form 
-    const modalFormProjEdit = document.querySelector("#modalFormProjEdit")
+    const modalFormEdit = document.querySelector("#modalFormProjEdit")
     // Get open button 
     // const openBtnProjEdit = document.querySelector(".editProject")
     // Get close button
-    const closeBtnProjEdit = document.querySelector("#closeBtnProjEdit")
+    const closeBtnEdit = document.querySelector("#closeBtnProjEdit")
     // Get modal submit button
-    const submitBtnProjEdit = document.querySelector("#submitBtnProjEdit")
+    const submitBtnEdit = document.querySelector("#submitBtnProjEdit")
 
     // Listen for open click 
     // openBtnProjEdit.addEventListener("click", openModalProjEdit)
     // Listen for close click 
-    closeBtnProjEdit.addEventListener("click", closeModalProjEdit)
+    closeBtnEdit.addEventListener("click", closeModalEdit)
     // Listen for outside click
-    window.addEventListener("click", outsideClickProjEdit)
+    window.addEventListener("click", outsideClickEdit)
     // Listen for submit click
-    submitBtnProjEdit.addEventListener("click", submitModalProjEdit)
+    submitBtnEdit.addEventListener("click", submitModalEdit)
 
     // Function to open modal
-    function openModalProjEdit() {
-        modalProjEdit.style.display = "block"
+    function openModalEdit() {
+        modalEdit.style.display = "block"
     } 
 
     // Function to close modal
-    function closeModalProjEdit(){
-        modalProjEdit.style.display = "none"
-        modalFormProjEdit.reset()
+    function closeModalEdit(){
+        modalEdit.style.display = "none"
+        modalFormEdit.reset()
     }
 
     // Function to close modal if outside click 
-    function outsideClickProjEdit(e) {
-        if(e.target == modalProjEdit) closeModalProjEdit()
+    function outsideClickEdit(e) {
+        if(e.target == modalEdit) closeModalEdit()
     }
 
     // Function to submit modal form and create new book
-    function submitModalProjEdit(){
+    function submitModalEdit(){
         let title = document.querySelector("#titleInputProjEdit").value
         emitterProjEdit.emit("submitProjEdit", title)
-        closeModalProjEdit()
+        closeModalEdit()
     }
 
-    return {openModalProjEdit}
+    return {openModalEdit}
 })()
 
 export {
-    renderModalProjectEdit,
+    modalProjectEdit,
     emitterProjEdit
 }

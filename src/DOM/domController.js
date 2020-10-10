@@ -1,10 +1,10 @@
-import {renderModalProject} from "./ModalForms/modalProject"
+import {modalProject} from "./ModalForms/modalProject"
 import {emitterProj} from "./ModalForms/modalProject"
-import {renderModalProjectEdit} from "./ModalForms/modalProjectEdit"
+import {modalProjectEdit} from "./ModalForms/modalProjectEdit"
 import {emitterProjEdit} from "./ModalForms/modalProjectEdit"
-import {renderModalTask} from "./ModalForms/modalTask"
+import {modalTask} from "./ModalForms/modalTask"
 import {emitterTask} from "./ModalForms/modalTask"
-import {renderModalTaskEdit} from "./ModalForms/modalTaskEdit"
+import {modalTaskEdit} from "./ModalForms/modalTaskEdit"
 import {emitterTaskEdit} from "./ModalForms/modalTaskEdit"
 import {logicController} from "../Logic/logicController"
 
@@ -33,7 +33,7 @@ const domController = (() => {
         // testRenderTasks()
         // renderProjects()
         renderTasks()
-        renderModalTask.hideOpenTaskBtn()
+        modalTask.hideOpenTaskBtn()
         // addProjBtn.addEventListener("click", addProject)
         // addTaskBtn.addEventListener("click", addTask)
     }
@@ -63,19 +63,13 @@ const domController = (() => {
     })
 
 
-    const removeAllProjects = () => {
-        const divProj = document.querySelectorAll(".project")
-        divProj.forEach(p =>  p.remove())
-    }
+    const removeAllProjects = () => document.querySelectorAll(".project").forEach(p => p.remove())
 
-    const removeAllTasks = () => {
-        const divTask = document.querySelectorAll(".task")
-        divTask.forEach(t => t.remove())
-    }
+    const removeAllTasks = () => document.querySelectorAll(".task").forEach(t => t.remove())
 
     const setProject = (index) => {
         logicController.setCurrentProject(index)
-        renderModalTask.showOpenTaskBtn()
+        modalTask.showOpenTaskBtn()
         renderTasks()
     }
 
@@ -114,7 +108,7 @@ const domController = (() => {
             const editProj = document.createElement("div")
             editProj.classList.add("editProject")
             editProj.innerText = "edit"
-            editProj.addEventListener("click", () => renderModalProjectEdit.openModalProjEdit())
+            editProj.addEventListener("click", () => modalProjectEdit.openModalEdit())
             containerProj.appendChild(editProj)
 
             const delProj = document.createElement("div")
@@ -148,7 +142,7 @@ const domController = (() => {
             const editTask = document.createElement("div")
             editTask.classList.add("editTask")
             editTask.innerText = "edit"
-            editTask.addEventListener("click", () => renderModalTaskEdit.openModalTaskEdit())
+            editTask.addEventListener("click", () => modalTaskEdit.openModalEdit())
             containerTask.appendChild(editTask)
 
             const delTask = document.createElement("div")

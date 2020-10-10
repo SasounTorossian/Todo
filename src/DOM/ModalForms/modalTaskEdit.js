@@ -1,64 +1,59 @@
 const EventEmitter = require("events")
 const emitterTaskEdit = new EventEmitter
 
-const renderModalTaskEdit = (() => {
+const modalTaskEdit = (() => {
     // Get modal element
-    const modalTaskEdit = document.querySelector("#modalTaskEdit")
+    const modalEdit = document.querySelector("#modalTaskEdit")
     // Get modal form 
-    const modalFormTaskEdit = document.querySelector("#modalFormTaskEdit")
+    const modalFormEdit = document.querySelector("#modalFormTaskEdit")
     // Get open button 
     // const openBtnTaskEdit = document.querySelector("#modalBtnTaskEdit")
     // Get close button
-    const closeBtnTaskEdit = document.querySelector("#closeBtnTaskEdit")
+    const closeBtnEdit = document.querySelector("#closeBtnTaskEdit")
     // Get modal submit button
-    const submitBtnTaskEdit = document.querySelector("#submitBtnTaskEdit")
+    const submitBtnEdit = document.querySelector("#submitBtnTaskEdit")
 
     // Listen for open click 
     // openBtnTaskEdit.addEventListener("click", openModalTaskEdit)
     // Listen for close click 
-    closeBtnTaskEdit.addEventListener("click", closeModalTaskEdit)
+    closeBtnEdit.addEventListener("click", closeModalEdit)
     // Listen for outside click
-    window.addEventListener("click", outsideClickTaskEdit)
+    window.addEventListener("click", outsideClickEdit)
     // Listen for submit click
-    submitBtnTaskEdit.addEventListener("click", submitModalTaskEdit)
+    submitBtnEdit.addEventListener("click", submitModalEdit)
 
     // Function to open modal
-    function openModalTaskEdit() {
-        modalTaskEdit.style.display = "block"
+    function openModalEdit() {
+        modalEdit.style.display = "block"
     } 
 
     // Function to close modal
-    function closeModalTaskEdit(){
-        modalTaskEdit.style.display = "none"
-        modalFormTaskEdit.reset()
+    function closeModalEdit(){
+        modalEdit.style.display = "none"
+        modalFormEdit.reset()
     }
 
     // Function to close modal if outside click 
-    function outsideClickTaskEdit(e) {
-        if(e.target == modalTask) closeModalTaskEdit()
+    function outsideClickEdit(e) {
+        if(e.target == modalTask) closeModalEdit()
     }
 
     // Function to submit modal form and create new book
-    function submitModalTaskEdit(){
+    function submitModalEdit(){
         // console.log("TEST")
         let title = document.querySelector("#titleInputTaskEdit").value
-        let desc = document.querySelector("#descInputEdit").value
-        let date = document.querySelector("#dateInputEdit").value
-        let priority = document.querySelector("input[name='priorityEdit']:checked").value
-        let notes = document.querySelector("#notesInputEdit").value
-        // console.log(title)
-        // console.log(desc)
-        // console.log(date)
-        // console.log(priority)
-        // console.log(notes)
+        let desc = document.querySelector("#descInputTaskEdit").value
+        let date = document.querySelector("#dateInputTaskEdit").value
+        let priority = document.querySelector("input[name='priorityTaskEdit']:checked").value
+        let notes = document.querySelector("#notesInputTaskEdit").value
         emitterTaskEdit.emit("submitTaskEdit", title, desc, date, priority, notes)
-        closeModalTaskEdit()
+        closeModalEdit()
     }
 
-    return {openModalTaskEdit}
+    return {openModalEdit}
 })()
 
 export {
-    renderModalTaskEdit,
+    modalTaskEdit,
     emitterTaskEdit
 }
