@@ -11,31 +11,30 @@ import {logicController} from "../Logic/logicController"
 //TODO: set curent project at start. 
 
 const domController = (() => {
-    const contentProj = document.querySelector("#contentProj")
-    const contentTask = document.querySelector("#contentTask")
 
     const testRenderProjects = () => {
         logicController.addProject("A")
         logicController.addProject("B")
         logicController.addProject("C")
         renderProjects()
-        // addProjBtn.style.display = "block"
     }
 
-    const testAddTask = () => {
-        const currentProjIndex = logicController.getCurrentProjectIndex()
-        logicController.addTask(currentProjIndex, "testproj", "testDesc", "123", "0", "abc")
+    const testRenderTasks = () => {
+        logicController.addTask(0, "testproj1", "testDesc", "123", "0", "abc")
+        logicController.addTask(0, "testproj2", "testDesc", "123", "0", "abc")
+        logicController.addTask(0, "testproj3", "testDesc", "123", "0", "abc")
+        logicController.addTask(1, "testproj4", "testDesc", "123", "0", "abc")
+        logicController.addTask(2, "testproj5", "testDesc", "123", "0", "abc")
+        logicController.addTask(2, "testproj6", "testDesc", "123", "0", "abc")
         renderTasks()
     }
 
     const render = () => {
         testRenderProjects()
-        // testRenderTasks()
+        testRenderTasks()
         // renderProjects()
-        renderTasks()
+        // renderTasks()
         modalTask.hideOpenTaskBtn()
-        // addProjBtn.addEventListener("click", addProject)
-        // addTaskBtn.addEventListener("click", addTask)
     }
 
     emitterProj.on("submitProj", (title) => {
@@ -62,10 +61,11 @@ const domController = (() => {
         renderTasks()
     })
 
-
     const removeAllProjects = () => document.querySelectorAll(".project").forEach(p => p.remove())
 
     const removeAllTasks = () => document.querySelectorAll(".task").forEach(t => t.remove())
+
+    const removeAllTasksDetails = () => document.querySelectorAll(".taskDetails").forEach(td => td.remove())
 
     const setProject = (index) => {
         logicController.setCurrentProject(index)
@@ -75,8 +75,7 @@ const domController = (() => {
 
     const setTask = (index) => {
         logicController.setCurrentTask(index)
-        // Display task details
-        // renderTasksDetails()
+        renderTasksDetails()
     }
 
     const deleteProject = (index) => {
@@ -117,6 +116,7 @@ const domController = (() => {
             delProj.addEventListener("click", () => deleteProject(index))
             containerProj.appendChild(delProj)
 
+            const contentProj = document.querySelector("#contentProj")
             contentProj.appendChild(containerProj)
         })
     } 
@@ -151,9 +151,48 @@ const domController = (() => {
             delTask.addEventListener("click", () => deleteTask(index))
             containerTask.appendChild(delTask)
 
+            const contentTask = document.querySelector("#contentTask")
             contentTask.appendChild(containerTask)
         })
     }
+
+    const renderTasksDetails = () => {
+        removeAllTasksDetails()
+        const task = logicController.getCurrentTask()
+        if(task == undefined || task.length == 0)  return
+
+        const containerTaskDetails = document.createElement("div") 
+        containerTaskDetails.classList.add("taskDetails")
+
+        const titleTaskDetails = document.createElement("div")
+        titleTaskDetails.classList.add("titleTaskDetail")
+        titleTaskDetails.innerText = task.title
+        containerTaskDetails.appendChild(titleTaskDetails)
+
+        const descTaskDetails = document.createElement("div")
+        descTaskDetails.classList.add("descTaskDetail")
+        descTaskDetails.innerText = task.desc
+        containerTaskDetails.appendChild(descTaskDetails)
+
+        const notesTaskDetails = document.createElement("div")
+        notesTaskDetails.classList.add("notesTaskDetail")
+        notesTaskDetails.innerText = task.notes
+        containerTaskDetails.appendChild(notesTaskDetails)
+
+        const dateTaskDetails = document.createElement("div")
+        dateTaskDetails.classList.add("dateTaskDetail")
+        dateTaskDetails.innerText = task.date
+        containerTaskDetails.appendChild(dateTaskDetails)
+
+        const priorityTaskDetails = document.createElement("div")
+        priorityTaskDetails.classList.add("priorityTaskDetail")
+        priorityTaskDetails.innerText = task.priority
+        containerTaskDetails.appendChild(priorityTaskDetails)
+
+        const contentTaskDetails = document.querySelector("#contentTaskDetails")
+        contentTaskDetails.appendChild(containerTaskDetails)
+    }
+
     return {render}
 })()
 

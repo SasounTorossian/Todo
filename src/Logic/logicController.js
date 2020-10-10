@@ -7,8 +7,6 @@ const logicController = (() => {
     let currentTask = null
 
     const addProject = (title) => {
-        // const project = projectFactory(title)
-        // console.log(project.tasks)
         projects.push(projectFactory(title))
     }
 
