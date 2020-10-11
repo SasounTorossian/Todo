@@ -120,7 +120,7 @@ const domController = (() => {
             containerProj.appendChild(delProj)
 
             const contentProj = document.querySelector("#contentProj")
-            contentProj.appendChild(containerProj)
+            contentProj.prepend(containerProj)
         })
     } 
 
@@ -140,7 +140,7 @@ const domController = (() => {
             titleTask.innerText = task.title
             containerTask.appendChild(titleTask)
 
-            // TODO: Task description.
+            // TODO: Task description
 
             const editTask = document.createElement("div")
             editTask.classList.add("editTask")
@@ -155,7 +155,7 @@ const domController = (() => {
             containerTask.appendChild(delTask)
 
             const contentTask = document.querySelector("#contentTask")
-            contentTask.appendChild(containerTask)
+            contentTask.prepend(containerTask)
         })
     }
 
