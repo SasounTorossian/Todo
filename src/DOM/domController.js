@@ -8,7 +8,7 @@ import {modalTaskEdit} from "./ModalForms/modalTaskEdit"
 import {emitterTaskEdit} from "./ModalForms/modalTaskEdit"
 import {logicController} from "../Logic/logicController"
 
-//TODO: set curent project at start. 
+//TODO: set current project at start. 
 
 const domController = (() => {
 
@@ -20,12 +20,12 @@ const domController = (() => {
     }
 
     const testRenderTasks = () => {
-        logicController.addTask(0, "testproj1", "testDesc", "123", "0", "abc")
-        logicController.addTask(0, "testproj2", "testDesc", "123", "0", "abc")
-        logicController.addTask(0, "testproj3", "testDesc", "123", "0", "abc")
-        logicController.addTask(1, "testproj4", "testDesc", "123", "0", "abc")
-        logicController.addTask(2, "testproj5", "testDesc", "123", "0", "abc")
-        logicController.addTask(2, "testproj6", "testDesc", "123", "0", "abc")
+        logicController.addTask(0, "testproj1", "testDesc1", "2020-10-07", "0", "abc")
+        logicController.addTask(0, "testproj2", "testDesc2", "2020-10-07", "0", "abc")
+        logicController.addTask(0, "testproj3", "testDesc3", "2020-10-07", "0", "abc")
+        logicController.addTask(1, "testproj4", "testDesc4", "2020-10-07", "0", "abc")
+        logicController.addTask(2, "testproj5", "testDesc5", "2020-10-07", "0", "abc")
+        logicController.addTask(2, "testproj6", "testDesc6", "2020-10-07", "0", "abc")
         renderTasks()
     }
 
@@ -44,6 +44,7 @@ const domController = (() => {
 
     emitterTask.on("submitTask", (title, desc, date, priority, notes) => {
         const currentProjIndex = logicController.getCurrentProjectIndex()
+        // TODO: format date to dd/mm/yyyy
         logicController.addTask(currentProjIndex, title, desc, date, priority, notes)
         renderTasks()
     })
@@ -54,6 +55,7 @@ const domController = (() => {
         renderProjects()
     })
 
+    // TODO: Ability to edit only one thing
     emitterTaskEdit.on("submitTaskEdit", (title, desc, date, priority, notes) => {
         const currentProjIndex = logicController.getCurrentProjectIndex() 
         const currentTaskIndex = logicController.getCurrentTaskIndex()
@@ -78,6 +80,7 @@ const domController = (() => {
         renderTasksDetails()
     }
 
+    // TODO: Ask user if they're sure
     const deleteProject = (index) => {
         logicController.removeProject(index)
         renderProjects()
@@ -174,11 +177,6 @@ const domController = (() => {
         descTaskDetails.innerText = task.desc
         containerTaskDetails.appendChild(descTaskDetails)
 
-        const notesTaskDetails = document.createElement("div")
-        notesTaskDetails.classList.add("notesTaskDetail")
-        notesTaskDetails.innerText = task.notes
-        containerTaskDetails.appendChild(notesTaskDetails)
-
         const dateTaskDetails = document.createElement("div")
         dateTaskDetails.classList.add("dateTaskDetail")
         dateTaskDetails.innerText = task.date
@@ -188,6 +186,11 @@ const domController = (() => {
         priorityTaskDetails.classList.add("priorityTaskDetail")
         priorityTaskDetails.innerText = task.priority
         containerTaskDetails.appendChild(priorityTaskDetails)
+
+        const notesTaskDetails = document.createElement("div")
+        notesTaskDetails.classList.add("notesTaskDetail")
+        notesTaskDetails.innerText = task.notes
+        containerTaskDetails.appendChild(notesTaskDetails)
 
         const contentTaskDetails = document.querySelector("#contentTaskDetails")
         contentTaskDetails.appendChild(containerTaskDetails)
