@@ -32,6 +32,7 @@ const domController = (() => {
     const render = () => {
         testRenderProjects()
         testRenderTasks()
+        
         // renderProjects()
         // renderTasks()
         modalTask.hideOpenTaskBtn()
@@ -119,9 +120,13 @@ const domController = (() => {
             delProj.addEventListener("click", () => deleteProject(index))
             containerProj.appendChild(delProj)
 
-            const contentProj = document.querySelector("#contentProj")
-            contentProj.prepend(containerProj)
+            // const contentProj = document.querySelector("#contentProj")
+            const openBtn = document.querySelector("#modalBtnProj")
+            // contentProj.appendChild(containerProj)
+            openBtn.before(containerProj)
         })
+
+        // renderCreateProjectBtn()
     } 
 
     const renderTasks = () => {
@@ -141,7 +146,7 @@ const domController = (() => {
             containerTask.appendChild(titleTask)
 
             // TODO: Task description
-
+            
             const editTask = document.createElement("div")
             editTask.classList.add("editTask")
             editTask.innerText = "edit"
@@ -154,8 +159,10 @@ const domController = (() => {
             delTask.addEventListener("click", () => deleteTask(index))
             containerTask.appendChild(delTask)
 
-            const contentTask = document.querySelector("#contentTask")
-            contentTask.prepend(containerTask)
+            // const contentTask = document.querySelector("#contentTask")
+            const openBtn = document.querySelector("#modalBtnTask")
+            // contentTask.appendChild(containerTask)
+            openBtn.before(containerTask)
         })
     }
 
@@ -195,6 +202,15 @@ const domController = (() => {
         const contentTaskDetails = document.querySelector("#contentTaskDetails")
         contentTaskDetails.appendChild(containerTaskDetails)
     }
+
+    // const renderCreateProjectBtn = () => {
+    //     const containerProjBtn = document.createElement("button") 
+    //     containerProjBtn.classList.add("openBtn")
+    //     containerProjBtn.id = "modalBtnProj"
+    //     containerProjBtn.innerText = "Click Here (Project)"
+    //     const contentProj = document.querySelector("#contentProj")
+    //     contentProj.appendChild(containerProjBtn)
+    // }
 
     return {render}
 })()

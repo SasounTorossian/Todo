@@ -46,7 +46,6 @@ body {
 }
 
 /* Project tab */
-
 .project {
   display: flex;
   justify-content: space-around;
@@ -71,8 +70,14 @@ body {
   margin: 5px;
 }
 
-/* Task tab */
+.openBtn {
+  width: 100%;
+  background: green;
+  padding: 5px;
+  margin: 15px 0;
+}
 
+/* Task tab */
 .task {
   display: flex;
   justify-content: space-around;
