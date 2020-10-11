@@ -45,14 +45,56 @@ body {
   width: 100%;
 }
 
+/* Project tab */
+
 .project {
   display: flex;
   justify-content: space-around;
+  background: red;
+  margin: 15px 0;
 }
+
+.titleProject {
+  background: blue;
+  margin: 5px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.editProject {
+  background: yellow;
+  margin: 5px;
+}
+
+.deleteProject {
+  background: purple;
+  margin: 5px;
+}
+
+/* Task tab */
 
 .task {
   display: flex;
   justify-content: space-around;
+  background: red;
+  margin: 15px 0;
+}
+
+.titleTask {
+  background: blue;
+  margin: 5px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.editTask {
+  background: yellow;
+  margin: 5px;
+}
+
+.deleteTask {
+  background: purple;
+  margin: 5px;
 }
 
 /* CONTENT MODAL */
