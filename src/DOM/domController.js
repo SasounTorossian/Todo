@@ -63,6 +63,7 @@ const domController = (() => {
         const currentTaskIndex = logicController.getCurrentTaskIndex()
         logicController.editTask(currentProjIndex, currentTaskIndex, title, desc, date, priority, notes)
         renderTasks()
+        renderTasksDetails()
     })
 
     const removeAllProjects = () => document.querySelectorAll(".project").forEach(p => p.remove())
@@ -143,8 +144,6 @@ const domController = (() => {
             const openBtn = document.querySelector("#modalBtnProj")
             openBtn.before(containerProj)
         })
-
-        // renderCreateProjectBtn()
     } 
 
     const renderTasks = () => {
