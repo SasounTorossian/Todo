@@ -39,6 +39,8 @@ const domController = (() => {
         modalTask.hideOpenTaskBtn()
     }
 
+    const dateConversion = (date) => date.split("-").reverse().join("/")
+
     emitterProj.on("submitProj", (title) => {
         logicController.addProject(title)
         renderProjects()
@@ -46,8 +48,8 @@ const domController = (() => {
 
     emitterTask.on("submitTask", (title, desc, date, priority, notes) => {
         const currentProjIndex = logicController.getCurrentProjectIndex()
-        // TODO: format date to dd/mm/yyyy
-        logicController.addTask(currentProjIndex, title, desc, date, priority, notes)
+        const dateFlipped = dateConversion(date)
+        logicController.addTask(currentProjIndex, title, desc, dateFlipped, priority, notes)
         renderTasks()
     })
 
@@ -58,6 +60,11 @@ const domController = (() => {
     })
 
     // TODO: Ability to edit only one thing
+    /**
+     * set edit inputs to none-required
+     * check which ones are available on submit.
+     * send only ones which exist, the rest become default or "uninterested" values.
+     */
     emitterTaskEdit.on("submitTaskEdit", (title, desc, date, priority, notes) => {
         const currentProjIndex = logicController.getCurrentProjectIndex() 
         const currentTaskIndex = logicController.getCurrentTaskIndex()
