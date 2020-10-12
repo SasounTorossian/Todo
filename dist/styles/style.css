@@ -61,11 +61,13 @@ body {
 }
 
 .editProject {
+  display: flex;
   background: yellow;
   margin: 5px;
 }
 
 .deleteProject {
+  display: flex;
   background: purple;
   margin: 5px;
 }
@@ -93,11 +95,13 @@ body {
 }
 
 .editTask {
+  display: flex;
   background: yellow;
   margin: 5px;
 }
 
 .deleteTask {
+  display: flex;
   background: purple;
   margin: 5px;
 }

@@ -110,19 +110,34 @@ const domController = (() => {
 
             const editProj = document.createElement("div")
             editProj.classList.add("editProject")
-            editProj.innerText = "edit"
             editProj.addEventListener("click", () => modalProjectEdit.openModalEdit())
+            const editProjImg = document.createElement("img")
+            editProjImg.classList.add("editProjImg")
+            editProjImg.src = "./images/edit_transparent.png"
+            editProjImg.height = "20"
+            editProj.appendChild(editProjImg)
+            const editProjText = document.createElement("div")
+            editProjText.classList.add("editProjText")
+            editProjText.innerText = "edit"
+            editProj.appendChild(editProjText)
             containerProj.appendChild(editProj)
 
             const delProj = document.createElement("div")
             delProj.classList.add("deleteProject")
-            delProj.innerText = "delete"
             delProj.addEventListener("click", () => deleteProject(index))
+            const delProjImg = document.createElement("img")
+            delProjImg.classList.add("delProjImg")
+            delProjImg.src = "./images/trash_transparent.png"
+            delProjImg.height = "20"
+            delProj.appendChild(delProjImg)
+            const delProjText = document.createElement("div")
+            delProjText.classList.add("delProjText")
+            delProjText.innerText = "delete"
+            delProj.appendChild(delProjText)
+
             containerProj.appendChild(delProj)
 
-            // const contentProj = document.querySelector("#contentProj")
             const openBtn = document.querySelector("#modalBtnProj")
-            // contentProj.appendChild(containerProj)
             openBtn.before(containerProj)
         })
 
@@ -149,19 +164,33 @@ const domController = (() => {
             
             const editTask = document.createElement("div")
             editTask.classList.add("editTask")
-            editTask.innerText = "edit"
             editTask.addEventListener("click", () => modalTaskEdit.openModalEdit())
+            const editTaskImg = document.createElement("img")
+            editTaskImg.classList.add("editTaskImg")
+            editTaskImg.src = "./images/edit_transparent.png"
+            editTaskImg.height = "20"
+            editTask.appendChild(editTaskImg)
+            const editTaskText = document.createElement("div")
+            editTaskText.classList.add("editTaskText")
+            editTaskText.innerText = "edit"
+            editTask.appendChild(editTaskText)
             containerTask.appendChild(editTask)
 
             const delTask = document.createElement("div")
             delTask.classList.add("deleteTask")
-            delTask.innerText = "delete"
             delTask.addEventListener("click", () => deleteTask(index))
+            const delTaskImg = document.createElement("img")
+            delTaskImg.classList.add("delTaskImg")
+            delTaskImg.src = "./images/trash_transparent.png"
+            delTaskImg.height = "20"
+            delTask.appendChild(delTaskImg)
+            const delTaskText = document.createElement("div")
+            delTaskText.classList.add("delTaskText")
+            delTaskText.innerText = "delete"
+            delTask.appendChild(delTaskText)
             containerTask.appendChild(delTask)
 
-            // const contentTask = document.querySelector("#contentTask")
             const openBtn = document.querySelector("#modalBtnTask")
-            // contentTask.appendChild(containerTask)
             openBtn.before(containerTask)
         })
     }
