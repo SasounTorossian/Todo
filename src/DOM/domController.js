@@ -8,7 +8,8 @@ import {modalTaskEdit} from "./ModalForms/modalTaskEdit"
 import {emitterTaskEdit} from "./ModalForms/modalTaskEdit"
 import {logicController} from "../Logic/logicController"
 
-//TODO: set current project at start. 
+// TODO: set current project at start. 
+// TODO: Storage!!!
 
 const domController = (() => {
 
@@ -92,6 +93,8 @@ const domController = (() => {
         logicController.removeTask(currentProjIndex, index)
         renderTasks()
     }
+
+    // TODO: Highlight selected project and task 
 
     const renderProjects = () => {
         removeAllProjects()
