@@ -14,6 +14,10 @@ const logicController = (() => {
         projects.splice(index, 1)
     }
 
+    const setProjects = (projs) => {
+        projects = projs 
+    }
+
     const getProjects = () => projects
 
     const editProject = (title, index) => {
@@ -35,7 +39,7 @@ const logicController = (() => {
     }
 
     const getTasks = () => {
-        if(!currentProj) return
+        if(!currentProj) return []
         return  currentProj.tasks
     }
 
@@ -56,6 +60,7 @@ const logicController = (() => {
     return {
         addProject,
         removeProject,
+        setProjects,
         getProjects,
         editProject,
         setCurrentProject,

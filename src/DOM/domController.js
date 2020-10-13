@@ -7,9 +7,11 @@ import {emitterTask} from "./ModalForms/modalTask"
 import {modalTaskEdit} from "./ModalForms/modalTaskEdit"
 import {emitterTaskEdit} from "./ModalForms/modalTaskEdit"
 import {logicController} from "../Logic/logicController"
+import {Storage} from "../Logic/Storage/storage"
 
 // TODO: set current project at start. 
 // TODO: Storage!!!
+// TODO: Style Details.
 
 const domController = (() => {
 
@@ -21,21 +23,29 @@ const domController = (() => {
     }
 
     const testRenderTasks = () => {
-        logicController.addTask(0, "testproj1", "testDesc1", "2020-10-07", "0", "abc")
-        logicController.addTask(0, "testproj2", "testDesc2", "2020-10-07", "0", "abc")
-        logicController.addTask(0, "testproj3", "testDesc3", "2020-10-07", "0", "abc")
-        logicController.addTask(1, "testproj4", "testDesc4", "2020-10-07", "0", "abc")
-        logicController.addTask(2, "testproj5", "testDesc5", "2020-10-07", "0", "abc")
+        // logicController.addTask(0, "This is test project 1", "This is a general description of the task for quick refernce.", "2020-10-07", "0", "These are long form notes I leave for to let me know more about the task. There should be no limit to how long this are, hence the input box in the modal should be large enough to accomodate it.")
+        logicController.addTask(0, "testproj2", "testDesc2", "2020-10-07", "1", "abc")
+        logicController.addTask(0, "testproj3", "testDesc3", "2020-10-07", "2", "abc")
+        logicController.addTask(1, "testproj4", "testDesc4", "2020-10-07", "2", "abc")
+        logicController.addTask(2, "testproj5", "testDesc5", "2020-10-07", "1", "abc")
         logicController.addTask(2, "testproj6", "testDesc6", "2020-10-07", "0", "abc")
         renderTasks()
     }
 
     const render = () => {
-        testRenderProjects()
-        testRenderTasks()
+        // testRenderProjects()
+        // testRenderTasks()
+        if(Storage.load() != null) {
+            logicController.setProjects(Storage.load())
+            renderProjects()
+        }
+        else {
+            
+            // load default
+        }
         
-        // renderProjects()
-        // renderTasks()
+        renderProjects()
+        renderTasks()
         modalTask.hideOpenTaskBtn()
     }
 
@@ -90,7 +100,7 @@ const domController = (() => {
         renderTasksDetails()
     }
 
-    // TODO: Ask user if they're sure
+    // TODO: Ask user if they're sure?
     const deleteProject = (index) => {
         logicController.removeProject(index)
         renderProjects()
@@ -106,9 +116,7 @@ const domController = (() => {
 
     const renderProjects = () => {
         removeAllProjects()
-        const projects = logicController.getProjects()
-        if (projects == undefined || projects.length == 0) return 
-        
+
         logicController.getProjects().forEach((proj, index) => {
             const containerProj = document.createElement("div") 
             containerProj.classList.add("project")
@@ -151,14 +159,14 @@ const domController = (() => {
             const openBtn = document.querySelector("#modalBtnProj")
             openBtn.before(containerProj)
         })
+
+        Storage.save(logicController.getProjects())
     } 
 
     const renderTasks = () => {
         removeAllTasks()
-        const tasks = logicController.getTasks()
-        if(tasks == undefined || tasks.length == 0)  return
 
-        tasks.forEach((task, index) => {
+        logicController.getTasks().forEach((task, index) => {
             const containerTask = document.createElement("div") 
             containerTask.classList.add("task")
             containerTask.addEventListener("click", () => setTask(index))
@@ -170,6 +178,14 @@ const domController = (() => {
             containerTask.appendChild(titleTask)
 
             // TODO: Task description
+
+            // TODO: Get current time?
+            // Keep in original date format and only convert to dd/mm/yyyy for final printing.
+            // let today = new Date().toLocaleDateString()
+            // console.log(today)
+            // console.log(task.date)
+            // console.log(task.date - today)
+            // console.log("time 2: " + task.date.getTime())
             
             const editTask = document.createElement("div")
             editTask.classList.add("editTask")
@@ -202,6 +218,8 @@ const domController = (() => {
             const openBtn = document.querySelector("#modalBtnTask")
             openBtn.before(containerTask)
         })
+
+        Storage.save(logicController.getProjects())
     }
 
     const renderTasksDetails = () => {
