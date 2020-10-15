@@ -11,6 +11,7 @@ import {Storage} from "../Logic/Storage/storage"
 
 // TODO: set current project at start. 
 // TODO: Style Details.
+// TODO: Editing resets everything. Stop that.
 
 const domController = (() => {
 
@@ -171,10 +172,12 @@ const domController = (() => {
             containerTask.classList.add("task")
             containerTask.addEventListener("click", () => setTask(index))
 
-            // TODO: Task colour based on priority
             const titleTask = document.createElement("div")
             titleTask.classList.add("titleTask")
             titleTask.innerText = task.title
+            if(task.priority == 1) titleTask.style.color = "green"
+            else if(task.priority == 2) titleTask.style.color = "orange"
+            else if(task.priority == 3) titleTask.style.color = "red"
             containerTask.appendChild(titleTask)
 
             // TODO: Task description
