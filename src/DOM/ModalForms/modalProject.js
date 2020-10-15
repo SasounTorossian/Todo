@@ -42,8 +42,9 @@ const modalProject = (() => {
     // Function to submit modal form and create new book
     function submitModal(){
         let title = document.querySelector("#titleInputProj").value
-        emitterProj.emit("submitProj", title)
+        if(!title) return
         closeModal()
+        emitterProj.emit("submitProj", title)
     }
 
     return {openModal}

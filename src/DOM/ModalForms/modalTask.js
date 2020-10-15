@@ -53,8 +53,9 @@ const modalTask = (() => {
         let date = document.querySelector("#dateInputTask").value
         let priority = document.querySelector("input[name='priorityTask']:checked").value
         let notes = document.querySelector("#notesInputTask").value
-        emitterTask.emit("submitTask", title, desc, date, priority, notes)
         closeModal()
+        if (!title || !desc || !date || !priority) return
+        emitterTask.emit("submitTask", title, desc, date, priority, notes)
     }
 
     return {hideOpenTaskBtn,

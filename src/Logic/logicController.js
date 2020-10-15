@@ -20,8 +20,8 @@ const logicController = (() => {
 
     const getProjects = () => projects
 
-    const editProject = (title, index) => {
-        projects[index].title = title //Need to use setter?
+    const editProject = (index, title) => {
+        if(title) projects[index].title = title //Need to use setter?
     }
 
     const setCurrentProject = (index) => currentProj = projects[index]
@@ -44,11 +44,11 @@ const logicController = (() => {
     }
 
     const editTask = (pindex, tindex, title, desc, date, priority, notes) => {
-        projects[pindex].tasks[tindex].title = title
-        projects[pindex].tasks[tindex].desc = desc
-        projects[pindex].tasks[tindex].notes = notes
-        projects[pindex].tasks[tindex].date = date
-        projects[pindex].tasks[tindex].priority = priority
+        if(title) projects[pindex].tasks[tindex].title = title
+        if(desc) projects[pindex].tasks[tindex].desc = desc
+        if(notes) projects[pindex].tasks[tindex].notes = notes
+        if(date) projects[pindex].tasks[tindex].date = date
+        if(priority) projects[pindex].tasks[tindex].priority = priority
     }
 
     const setCurrentTask = (index) => currentTask = currentProj.tasks[index]

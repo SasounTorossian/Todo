@@ -10,39 +10,43 @@ import {logicController} from "../Logic/logicController"
 import {Storage} from "../Logic/Storage/storage"
 
 // TODO: set current project at start. 
-// TODO: Storage!!!
 // TODO: Style Details.
 
 const domController = (() => {
 
-    const testRenderProjects = () => {
+    const loadDefault = () => {
         logicController.addProject("A")
         logicController.addProject("B")
         logicController.addProject("C")
-        renderProjects()
-    }
-
-    const testRenderTasks = () => {
-        // logicController.addTask(0, "This is test project 1", "This is a general description of the task for quick refernce.", "2020-10-07", "0", "These are long form notes I leave for to let me know more about the task. There should be no limit to how long this are, hence the input box in the modal should be large enough to accomodate it.")
         logicController.addTask(0, "testproj2", "testDesc2", "2020-10-07", "1", "abc")
         logicController.addTask(0, "testproj3", "testDesc3", "2020-10-07", "2", "abc")
         logicController.addTask(1, "testproj4", "testDesc4", "2020-10-07", "2", "abc")
         logicController.addTask(2, "testproj5", "testDesc5", "2020-10-07", "1", "abc")
         logicController.addTask(2, "testproj6", "testDesc6", "2020-10-07", "0", "abc")
-        renderTasks()
     }
+
+    // const testRenderProjects = () => {
+    //     logicController.addProject("A")
+    //     logicController.addProject("B")
+    //     logicController.addProject("C")
+    //     renderProjects()
+    // }
+
+    // const testRenderTasks = () => {
+    //     // logicController.addTask(0, "This is test project 1", "This is a general description of the task for quick refernce.", "2020-10-07", "0", "These are long form notes I leave for to let me know more about the task. There should be no limit to how long this are, hence the input box in the modal should be large enough to accomodate it.")
+    //     logicController.addTask(0, "testproj2", "testDesc2", "2020-10-07", "1", "abc")
+    //     logicController.addTask(0, "testproj3", "testDesc3", "2020-10-07", "2", "abc")
+    //     logicController.addTask(1, "testproj4", "testDesc4", "2020-10-07", "2", "abc")
+    //     logicController.addTask(2, "testproj5", "testDesc5", "2020-10-07", "1", "abc")
+    //     logicController.addTask(2, "testproj6", "testDesc6", "2020-10-07", "0", "abc")
+    //     renderTasks()
+    // }
 
     const render = () => {
         // testRenderProjects()
         // testRenderTasks()
-        if(Storage.load() != null) {
-            logicController.setProjects(Storage.load())
-            renderProjects()
-        }
-        else {
-            
-            // load default
-        }
+        if(Storage.load() != null) logicController.setProjects(Storage.load())
+        else loadDefault()
         
         renderProjects()
         renderTasks()
@@ -56,6 +60,7 @@ const domController = (() => {
         renderProjects()
     })
 
+    // Use chained methods for adding task to project or edit
     emitterTask.on("submitTask", (title, desc, date, priority, notes) => {
         const currentProjIndex = logicController.getCurrentProjectIndex()
         const dateFlipped = dateConversion(date)
@@ -65,16 +70,10 @@ const domController = (() => {
 
     emitterProjEdit.on("submitProjEdit", (title) => {
         const currentProjIndex = logicController.getCurrentProjectIndex() 
-        logicController.editProject(title, currentProjIndex)
+        logicController.editProject(currentProjIndex, title)
         renderProjects()
     })
 
-    // TODO: Ability to edit only one thing
-    /**
-     * set edit inputs to none-required
-     * check which ones are available on submit.
-     * send only ones which exist, the rest become default or "uninterested" values.
-     */
     emitterTaskEdit.on("submitTaskEdit", (title, desc, date, priority, notes) => {
         const currentProjIndex = logicController.getCurrentProjectIndex() 
         const currentTaskIndex = logicController.getCurrentTaskIndex()
@@ -113,6 +112,7 @@ const domController = (() => {
     }
 
     // TODO: Highlight selected project and task 
+    // TODO: Move render code to separate files.
 
     const renderProjects = () => {
         removeAllProjects()

@@ -6,15 +6,11 @@ const modalTaskEdit = (() => {
     const modalEdit = document.querySelector("#modalTaskEdit")
     // Get modal form 
     const modalFormEdit = document.querySelector("#modalFormTaskEdit")
-    // Get open button 
-    // const openBtnTaskEdit = document.querySelector("#modalBtnTaskEdit")
     // Get close button
     const closeBtnEdit = document.querySelector("#closeBtnTaskEdit")
     // Get modal submit button
     const submitBtnEdit = document.querySelector("#submitBtnTaskEdit")
 
-    // Listen for open click 
-    // openBtnTaskEdit.addEventListener("click", openModalTaskEdit)
     // Listen for close click 
     closeBtnEdit.addEventListener("click", closeModalEdit)
     // Listen for outside click
@@ -40,14 +36,13 @@ const modalTaskEdit = (() => {
 
     // Function to submit modal form and create new book
     function submitModalEdit(){
-        // console.log("TEST")
         let title = document.querySelector("#titleInputTaskEdit").value
         let desc = document.querySelector("#descInputTaskEdit").value
         let date = document.querySelector("#dateInputTaskEdit").value
         let priority = document.querySelector("input[name='priorityTaskEdit']:checked").value
-        let notes = document.querySelector("#notesInputTaskEdit").value
-        emitterTaskEdit.emit("submitTaskEdit", title, desc, date, priority, notes)
+        let notes = document.querySelector("#notesInputTaskEdit").value 
         closeModalEdit()
+        emitterTaskEdit.emit("submitTaskEdit", title, desc, date, priority, notes)
     }
 
     return {openModalEdit}
