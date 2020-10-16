@@ -12,7 +12,8 @@ const Time = (() => {
     const getTimeDifference = (due) => {
         const today = new Date()
         const dueDate = new Date(due)
-        let diffTime = Math.abs(dueDate - today)
+        const diffTime = dueDate - today
+        if(diffTime <= 0) return null
         const days = Math.floor(diffTime/msInDay)
         const hours = Math.floor(diffTime/msInHour) % 24
         const minutes = Math.floor(diffTime/msinMinute) % 60

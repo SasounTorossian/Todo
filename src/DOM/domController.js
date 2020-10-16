@@ -6,15 +6,14 @@ import {modalTask} from "./ModalForms/modalTask"
 import {emitterTask} from "./ModalForms/modalTask"
 import {modalTaskEdit} from "./ModalForms/modalTaskEdit"
 import {emitterTaskEdit} from "./ModalForms/modalTaskEdit"
-import {LogicController} from "../Logic/LogicController"
+import {LogicController} from "../Logic/logicController"
 import {Storage} from "../Logic/Storage/storage"
 import {Time} from "../Logic/Time/time"
 
 // TODO: Style Details.
 
 const DomController = (() => {
-
-    // Should be in storage?
+    // Should be in storage?, or put in LogicController.addDefault()
     const loadDefault = () => {
         LogicController.addProject("A")
         LogicController.addProject("B")
@@ -31,6 +30,7 @@ const DomController = (() => {
         else loadDefault()
         renderProjects()
         renderTasks()
+        Storage.save(LogicController.getProjects())
         modalTask.hideOpenTaskBtn()
     }
 
@@ -42,7 +42,6 @@ const DomController = (() => {
     // Use chained methods for adding task to project or edit
     emitterTask.on("submitTask", (title, desc, date, priority, notes) => {
         const currentProjIndex = LogicController.getCurrentProjectIndex()
-        // const dateFlipped = dateConversion(date)
         LogicController.addTask(currentProjIndex, title, desc, date, priority, notes)
         renderTasks()
     })
@@ -61,9 +60,7 @@ const DomController = (() => {
         renderTasksDetails()
     })
 
-    const removeAllProjects = () => {
-        document.querySelectorAll(".project").forEach(p => p.remove())
-    }
+    const removeAllProjects = () => document.querySelectorAll(".project").forEach(p => p.remove())
 
     const removeAllTasks = () => document.querySelectorAll(".task").forEach(t => t.remove())
 
@@ -92,7 +89,7 @@ const DomController = (() => {
     }
 
     // TODO: Highlight selected project and task 
-    // TODO: Move render code to separate files.
+    // TODO: Move render code to separate files. Too intertwined. Can't for now.
 
     const renderProjects = () => {
         removeAllProjects()
@@ -158,8 +155,6 @@ const DomController = (() => {
             else if(task.priority == 2) titleTask.style.color = "orange"
             else if(task.priority == 3) titleTask.style.color = "red"
             containerTask.appendChild(titleTask)
-
-            // TODO: Task description
             
             const editTask = document.createElement("div")
             editTask.classList.add("editTask")
@@ -221,7 +216,9 @@ const DomController = (() => {
 
         const timeLeftTaskDetails = document.createElement("div")
         timeLeftTaskDetails.classList.add("timeLeftTaskDetail")
-        timeLeftTaskDetails.innerText = Time.getTimeDifference(task.date)
+        const timeDiff = Time.getTimeDifference(task.date)
+        if(timeDiff == null) timeLeftTaskDetails.innerText = "Expired"
+        else timeLeftTaskDetails.innerText = timeDiff
         containerTaskDetails.appendChild(timeLeftTaskDetails)
 
         const priorityTaskDetails = document.createElement("div")
