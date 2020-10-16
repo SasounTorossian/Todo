@@ -6,79 +6,57 @@ import {modalTask} from "./ModalForms/modalTask"
 import {emitterTask} from "./ModalForms/modalTask"
 import {modalTaskEdit} from "./ModalForms/modalTaskEdit"
 import {emitterTaskEdit} from "./ModalForms/modalTaskEdit"
-import {logicController} from "../Logic/logicController"
+import {LogicController} from "../Logic/LogicController"
 import {Storage} from "../Logic/Storage/storage"
 import {Time} from "../Logic/Time/time"
 
-// TODO: set current project at start. 
 // TODO: Style Details.
-// TODO: Editing resets everything. Stop that.
 
-const domController = (() => {
+const DomController = (() => {
 
     // Should be in storage?
     const loadDefault = () => {
-        logicController.addProject("A")
-        logicController.addProject("B")
-        logicController.addProject("C")
-        logicController.addTask(0, "testproj2", "testDesc2", "2020-11-07T08:45", "1", "abc")
-        logicController.addTask(0, "testproj3", "testDesc3", "2020-11-07T08:45", "3", "abc")
-        logicController.addTask(1, "testproj4", "testDesc4", "2020-11-07T08:45", "2", "abc")
-        logicController.addTask(2, "testproj5", "testDesc5", "2020-11-07T08:45", "1", "abc")
-        logicController.addTask(2, "testproj6", "testDesc6", "2020-11-07T08:45", "2", "abc")
+        LogicController.addProject("A")
+        LogicController.addProject("B")
+        LogicController.addProject("C")
+        LogicController.addTask(0, "testproj2", "testDesc2", "2020-11-07T08:45", "1", "abc")
+        LogicController.addTask(0, "testproj3", "testDesc3", "2020-11-07T08:45", "3", "abc")
+        LogicController.addTask(1, "testproj4", "testDesc4", "2020-11-07T08:45", "2", "abc")
+        LogicController.addTask(2, "testproj5", "testDesc5", "2020-11-07T08:45", "1", "abc")
+        LogicController.addTask(2, "testproj6", "testDesc6", "2020-11-07T08:45", "2", "abc")
     }
 
-    // const testRenderProjects = () => {
-    //     logicController.addProject("A")
-    //     logicController.addProject("B")
-    //     logicController.addProject("C")
-    //     renderProjects()
-    // }
-
-    // const testRenderTasks = () => {
-    //     // logicController.addTask(0, "This is test project 1", "This is a general description of the task for quick refernce.", "2020-10-07", "0", "These are long form notes I leave for to let me know more about the task. There should be no limit to how long this are, hence the input box in the modal should be large enough to accomodate it.")
-    //     logicController.addTask(0, "testproj2", "testDesc2", "2020-10-07", "1", "abc")
-    //     logicController.addTask(0, "testproj3", "testDesc3", "2020-10-07", "2", "abc")
-    //     logicController.addTask(1, "testproj4", "testDesc4", "2020-10-07", "2", "abc")
-    //     logicController.addTask(2, "testproj5", "testDesc5", "2020-10-07", "1", "abc")
-    //     logicController.addTask(2, "testproj6", "testDesc6", "2020-10-07", "0", "abc")
-    //     renderTasks()
-    // }
-
     const render = () => {
-        // testRenderProjects()
-        // testRenderTasks()
-        if(Storage.load() != null) logicController.setProjects(Storage.load())
+        if(Storage.load() != null) LogicController.setProjects(Storage.load())
         else loadDefault()
-        
         renderProjects()
         renderTasks()
         modalTask.hideOpenTaskBtn()
     }
 
     emitterProj.on("submitProj", (title) => {
-        logicController.addProject(title)
+        LogicController.addProject(title)
         renderProjects()
     })
 
     // Use chained methods for adding task to project or edit
     emitterTask.on("submitTask", (title, desc, date, priority, notes) => {
-        const currentProjIndex = logicController.getCurrentProjectIndex()
+        const currentProjIndex = LogicController.getCurrentProjectIndex()
         // const dateFlipped = dateConversion(date)
-        logicController.addTask(currentProjIndex, title, desc, date, priority, notes)
+        LogicController.addTask(currentProjIndex, title, desc, date, priority, notes)
         renderTasks()
     })
 
     emitterProjEdit.on("submitProjEdit", (title) => {
-        const currentProjIndex = logicController.getCurrentProjectIndex() 
-        logicController.editProject(currentProjIndex, title)
+        const currentProjIndex = LogicController.getCurrentProjectIndex() 
+        LogicController.editProject(currentProjIndex, title)
         renderProjects()
     })
 
     emitterTaskEdit.on("submitTaskEdit", (title, desc, date, priority, notes) => {
-        const currentProjIndex = logicController.getCurrentProjectIndex() 
-        const currentTaskIndex = logicController.getCurrentTaskIndex()
-        logicController.editTask(currentProjIndex, currentTaskIndex, title, desc, date, priority, notes)
+        const currentProjIndex = LogicController.getCurrentProjectIndex() 
+        const currentTaskIndex = LogicController.getCurrentTaskIndex()
+        LogicController.editTask(currentProjIndex, currentTaskIndex, title, desc, date, priority, notes)
         renderTasks()
         renderTasksDetails()
     })
@@ -92,25 +70,24 @@ const domController = (() => {
     const removeAllTasksDetails = () => document.querySelectorAll(".taskDetails").forEach(td => td.remove())
 
     const setProject = (index) => {
-        logicController.setCurrentProject(index)
+        LogicController.setCurrentProject(index)
         modalTask.showOpenTaskBtn()
         renderTasks()
     }
 
     const setTask = (index) => {
-        logicController.setCurrentTask(index)
+        LogicController.setCurrentTask(index)
         renderTasksDetails()
     }
 
-    // TODO: Ask user if they're sure?
     const deleteProject = (index) => {
-        logicController.removeProject(index)
+        LogicController.removeProject(index)
         renderProjects()
     }
 
     const deleteTask = (index) => {
-        const currentProjIndex = logicController.getCurrentProjectIndex()
-        logicController.removeTask(currentProjIndex, index)
+        const currentProjIndex = LogicController.getCurrentProjectIndex()
+        LogicController.removeTask(currentProjIndex, index)
         renderTasks()
     }
 
@@ -120,7 +97,7 @@ const domController = (() => {
     const renderProjects = () => {
         removeAllProjects()
 
-        logicController.getProjects().forEach((proj, index) => {
+        LogicController.getProjects().forEach((proj, index) => {
             const containerProj = document.createElement("div") 
             containerProj.classList.add("project")
             containerProj.addEventListener("click", () => setProject(index))
@@ -163,13 +140,13 @@ const domController = (() => {
             openBtn.before(containerProj)
         })
 
-        Storage.save(logicController.getProjects())
+        Storage.save(LogicController.getProjects())
     } 
 
     const renderTasks = () => {
         removeAllTasks()
 
-        logicController.getTasks().forEach((task, index) => {
+        LogicController.getTasks().forEach((task, index) => {
             const containerTask = document.createElement("div") 
             containerTask.classList.add("task")
             containerTask.addEventListener("click", () => setTask(index))
@@ -216,12 +193,12 @@ const domController = (() => {
             openBtn.before(containerTask)
         })
 
-        Storage.save(logicController.getProjects())
+        Storage.save(LogicController.getProjects())
     }
 
     const renderTasksDetails = () => {
         removeAllTasksDetails()
-        const task = logicController.getCurrentTask()
+        const task = LogicController.getCurrentTask()
         if(task == undefined || task.length == 0)  return
 
         const containerTaskDetails = document.createElement("div") 
@@ -265,5 +242,5 @@ const domController = (() => {
 })()
 
 export {
-    domController
+    DomController
 }

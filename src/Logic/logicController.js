@@ -1,7 +1,7 @@
 import {projectFactory} from "./factory"
 import {taskFactory} from "./factory"
 
-const logicController = (() => {
+const LogicController = (() => {
     let projects = []
     let currentProj = null
     let currentTask = null
@@ -79,5 +79,5 @@ const logicController = (() => {
 })()
 
 export {
-    logicController
+    LogicController
 }

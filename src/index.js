@@ -1,3 +1,3 @@
-import {domController} from "./DOM/domController"
+import {DomController} from "./DOM/domController"
 
-domController.render()
+DomController.render()
