@@ -31,6 +31,8 @@ const logicController = (() => {
     const getCurrentProjectIndex = () => projects.findIndex(p => p == currentProj)
     
     const addTask = (pindex, title, desc, date, priority, notes) => {
+        console.log(typeof date)
+        console.log(date)
         projects[pindex].tasks.push(taskFactory(title, desc, date, priority, notes))
     }
 

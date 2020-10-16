@@ -8,6 +8,7 @@ import {modalTaskEdit} from "./ModalForms/modalTaskEdit"
 import {emitterTaskEdit} from "./ModalForms/modalTaskEdit"
 import {logicController} from "../Logic/logicController"
 import {Storage} from "../Logic/Storage/storage"
+import {Time} from "../Logic/Time/time"
 
 // TODO: set current project at start. 
 // TODO: Style Details.
@@ -20,11 +21,11 @@ const domController = (() => {
         logicController.addProject("A")
         logicController.addProject("B")
         logicController.addProject("C")
-        logicController.addTask(0, "testproj2", "testDesc2", "2020-10-07", "1", "abc")
-        logicController.addTask(0, "testproj3", "testDesc3", "2020-10-07", "3", "abc")
-        logicController.addTask(1, "testproj4", "testDesc4", "2020-10-07", "2", "abc")
-        logicController.addTask(2, "testproj5", "testDesc5", "2020-10-07", "1", "abc")
-        logicController.addTask(2, "testproj6", "testDesc6", "2020-10-07", "2", "abc")
+        logicController.addTask(0, "testproj2", "testDesc2", "2020-11-07T08:45", "1", "abc")
+        logicController.addTask(0, "testproj3", "testDesc3", "2020-11-07T08:45", "3", "abc")
+        logicController.addTask(1, "testproj4", "testDesc4", "2020-11-07T08:45", "2", "abc")
+        logicController.addTask(2, "testproj5", "testDesc5", "2020-11-07T08:45", "1", "abc")
+        logicController.addTask(2, "testproj6", "testDesc6", "2020-11-07T08:45", "2", "abc")
     }
 
     // const testRenderProjects = () => {
@@ -55,8 +56,6 @@ const domController = (() => {
         modalTask.hideOpenTaskBtn()
     }
 
-    const dateConversion = (date) => date.split("-").reverse().join("/")
-
     emitterProj.on("submitProj", (title) => {
         logicController.addProject(title)
         renderProjects()
@@ -65,8 +64,8 @@ const domController = (() => {
     // Use chained methods for adding task to project or edit
     emitterTask.on("submitTask", (title, desc, date, priority, notes) => {
         const currentProjIndex = logicController.getCurrentProjectIndex()
-        const dateFlipped = dateConversion(date)
-        logicController.addTask(currentProjIndex, title, desc, dateFlipped, priority, notes)
+        // const dateFlipped = dateConversion(date)
+        logicController.addTask(currentProjIndex, title, desc, date, priority, notes)
         renderTasks()
     })
 
@@ -184,14 +183,6 @@ const domController = (() => {
             containerTask.appendChild(titleTask)
 
             // TODO: Task description
-
-            // TODO: Get current time?
-            // Keep in original date format and only convert to dd/mm/yyyy for final printing.
-            // let today = new Date().toLocaleDateString()
-            // console.log(today)
-            // console.log(task.date)
-            // console.log(task.date - today)
-            // console.log("time 2: " + task.date.getTime())
             
             const editTask = document.createElement("div")
             editTask.classList.add("editTask")
@@ -248,8 +239,13 @@ const domController = (() => {
 
         const dateTaskDetails = document.createElement("div")
         dateTaskDetails.classList.add("dateTaskDetail")
-        dateTaskDetails.innerText = task.date
+        dateTaskDetails.innerText = Time.dateConversion(task.date)
         containerTaskDetails.appendChild(dateTaskDetails)
+
+        const timeLeftTaskDetails = document.createElement("div")
+        timeLeftTaskDetails.classList.add("timeLeftTaskDetail")
+        timeLeftTaskDetails.innerText = Time.getTimeDifference(task.date)
+        containerTaskDetails.appendChild(timeLeftTaskDetails)
 
         const priorityTaskDetails = document.createElement("div")
         priorityTaskDetails.classList.add("priorityTaskDetail")
@@ -264,15 +260,6 @@ const domController = (() => {
         const contentTaskDetails = document.querySelector("#contentTaskDetails")
         contentTaskDetails.appendChild(containerTaskDetails)
     }
-
-    // const renderCreateProjectBtn = () => {
-    //     const containerProjBtn = document.createElement("button") 
-    //     containerProjBtn.classList.add("openBtn")
-    //     containerProjBtn.id = "modalBtnProj"
-    //     containerProjBtn.innerText = "Click Here (Project)"
-    //     const contentProj = document.querySelector("#contentProj")
-    //     contentProj.appendChild(containerProjBtn)
-    // }
 
     return {render}
 })()
