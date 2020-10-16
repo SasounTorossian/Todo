@@ -46,9 +46,9 @@ const logicController = (() => {
     const editTask = (pindex, tindex, title, desc, date, priority, notes) => {
         if(title) projects[pindex].tasks[tindex].title = title
         if(desc) projects[pindex].tasks[tindex].desc = desc
-        if(notes) projects[pindex].tasks[tindex].notes = notes
         if(date) projects[pindex].tasks[tindex].date = date
         if(priority) projects[pindex].tasks[tindex].priority = priority
+        if(notes) projects[pindex].tasks[tindex].notes = notes
     }
 
     const setCurrentTask = (index) => currentTask = currentProj.tasks[index]

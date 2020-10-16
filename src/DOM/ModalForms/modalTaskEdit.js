@@ -39,7 +39,10 @@ const modalTaskEdit = (() => {
         let title = document.querySelector("#titleInputTaskEdit").value
         let desc = document.querySelector("#descInputTaskEdit").value
         let date = document.querySelector("#dateInputTaskEdit").value
-        let priority = document.querySelector("input[name='priorityTaskEdit']:checked").value
+        let priority = ""
+        for (const pt of document.querySelectorAll("input[name='priorityTaskEdit']")) {
+            if(pt.checked) priority = pt.value
+        }
         let notes = document.querySelector("#notesInputTaskEdit").value 
         closeModalEdit()
         emitterTaskEdit.emit("submitTaskEdit", title, desc, date, priority, notes)

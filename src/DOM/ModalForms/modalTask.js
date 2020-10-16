@@ -46,12 +46,17 @@ const modalTask = (() => {
         if(e.target == modal) closeModal()
     }
 
+
+
     // Function to submit modal form and create new book
     function submitModal(){
         let title = document.querySelector("#titleInputTask").value
         let desc = document.querySelector("#descInputTask").value
         let date = document.querySelector("#dateInputTask").value
-        let priority = document.querySelector("input[name='priorityTask']:checked").value
+        let priority = ""
+        for (const pt of document.querySelectorAll("input[name='priorityTask']")) {
+            if(pt.checked) priority = pt.value
+        }
         let notes = document.querySelector("#notesInputTask").value
         closeModal()
         if (!title || !desc || !date || !priority) return

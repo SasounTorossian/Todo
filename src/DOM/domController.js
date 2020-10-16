@@ -15,15 +15,16 @@ import {Storage} from "../Logic/Storage/storage"
 
 const domController = (() => {
 
+    // Should be in storage?
     const loadDefault = () => {
         logicController.addProject("A")
         logicController.addProject("B")
         logicController.addProject("C")
         logicController.addTask(0, "testproj2", "testDesc2", "2020-10-07", "1", "abc")
-        logicController.addTask(0, "testproj3", "testDesc3", "2020-10-07", "2", "abc")
+        logicController.addTask(0, "testproj3", "testDesc3", "2020-10-07", "3", "abc")
         logicController.addTask(1, "testproj4", "testDesc4", "2020-10-07", "2", "abc")
         logicController.addTask(2, "testproj5", "testDesc5", "2020-10-07", "1", "abc")
-        logicController.addTask(2, "testproj6", "testDesc6", "2020-10-07", "0", "abc")
+        logicController.addTask(2, "testproj6", "testDesc6", "2020-10-07", "2", "abc")
     }
 
     // const testRenderProjects = () => {
@@ -83,7 +84,9 @@ const domController = (() => {
         renderTasksDetails()
     })
 
-    const removeAllProjects = () => document.querySelectorAll(".project").forEach(p => p.remove())
+    const removeAllProjects = () => {
+        document.querySelectorAll(".project").forEach(p => p.remove())
+    }
 
     const removeAllTasks = () => document.querySelectorAll(".task").forEach(t => t.remove())
 
