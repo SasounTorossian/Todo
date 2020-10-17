@@ -97,6 +97,7 @@ const DomController = (() => {
         LogicController.getProjects().forEach((proj, index) => {
             const containerProj = document.createElement("div") 
             containerProj.classList.add("project")
+            containerProj.classList.add("tab")
             containerProj.addEventListener("click", () => setProject(index))
 
             const titleProj = document.createElement("div")
@@ -146,6 +147,7 @@ const DomController = (() => {
         LogicController.getTasks().forEach((task, index) => {
             const containerTask = document.createElement("div") 
             containerTask.classList.add("task")
+            containerTask.classList.add("tab")
             containerTask.addEventListener("click", () => setTask(index))
 
             const titleTask = document.createElement("div")
