@@ -213,8 +213,13 @@ const DomController = (() => {
 
         const dateTaskDetails = document.createElement("div")
         dateTaskDetails.classList.add("dateTaskDetail")
-        dateTaskDetails.innerText = Time.dateConversion(task.date)
+        dateTaskDetails.innerText = Time.getDate(task.date)
         containerTaskDetails.appendChild(dateTaskDetails)
+
+        const timeTaskDetails = document.createElement("div")
+        timeTaskDetails.classList.add("timeTaskDetail")
+        timeTaskDetails.innerText = Time.getTime(task.date)
+        containerTaskDetails.appendChild(timeTaskDetails)
 
         const timeLeftTaskDetails = document.createElement("div")
         timeLeftTaskDetails.classList.add("timeLeftTaskDetail")
