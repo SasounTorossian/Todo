@@ -9,9 +9,9 @@ body, html {
 }
 
 body {
-    position: relative;
-    min-height: 100vh;
     background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
 }
 
 /* HEADER */
@@ -34,8 +34,9 @@ body {
 }
 
 .subContent {
-  margin: 0 10px;
-  padding: 10px;
+  height: 100%;
+  margin: 0 5px;
+  padding: 0 10px;
   border: 2px black solid;
   border-radius: 5px;
 }
@@ -107,7 +108,7 @@ body {
   }
 
 .project:hover, .editProject:hover, .deleteProject:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .openBtn {
@@ -125,7 +126,7 @@ body {
 }
 
 .openBtn:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 /* Task tab */
@@ -180,7 +181,7 @@ body {
   }
 
 .task:hover, .editTask:hover, .deleteTask:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .titleTask, .titleProject {
@@ -235,13 +236,14 @@ body {
 
 /* FOOTER */
 .footer {
-    position: absolute;
+    /* position: absolute;
     bottom: 0;
     width: 100%;
+    height: 2.5rem; */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: auto;
+    margin: 20px;
   }
   
   .footer p {
@@ -378,5 +380,5 @@ body {
 }
 
 .submitButton:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
