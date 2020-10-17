@@ -114,7 +114,7 @@ const DomController = (() => {
             editProj.appendChild(editProjImg)
             const editProjText = document.createElement("div")
             editProjText.classList.add("editProjText")
-            editProjText.innerText = "edit"
+            editProjText.innerText = "Edit"
             editProj.appendChild(editProjText)
             containerProj.appendChild(editProj)
 
@@ -128,7 +128,7 @@ const DomController = (() => {
             delProj.appendChild(delProjImg)
             const delProjText = document.createElement("div")
             delProjText.classList.add("delProjText")
-            delProjText.innerText = "delete"
+            delProjText.innerText = "Del"
             delProj.appendChild(delProjText)
 
             containerProj.appendChild(delProj)
@@ -166,7 +166,7 @@ const DomController = (() => {
             editTask.appendChild(editTaskImg)
             const editTaskText = document.createElement("div")
             editTaskText.classList.add("editTaskText")
-            editTaskText.innerText = "edit"
+            editTaskText.innerText = "Edit"
             editTask.appendChild(editTaskText)
             containerTask.appendChild(editTask)
 
@@ -180,7 +180,7 @@ const DomController = (() => {
             delTask.appendChild(delTaskImg)
             const delTaskText = document.createElement("div")
             delTaskText.classList.add("delTaskText")
-            delTaskText.innerText = "delete"
+            delTaskText.innerText = "Del"
             delTask.appendChild(delTaskText)
             containerTask.appendChild(delTask)
 

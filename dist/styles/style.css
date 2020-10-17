@@ -263,13 +263,21 @@ body {
   position: absolute;
   background-color: white;
   margin: auto;
-  padding: 1px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  width: 40%;
   border: 1.5px solid black;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+}
+
+.modalTitle {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  line-height: 0.7em ; 
+  margin: 15px;
+  font-size: 25px;
 }
 
 .closeBtn {
@@ -286,77 +294,101 @@ body {
   cursor: pointer;
 }
 
+.modalForm {
+  margin: 20px;
+}
+
 .formContainer {
-  position: relative;
-  width: 90%;
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-self: center;
+  width: 100%;
   height: 50%;
   overflow: hidden;
-  margin: 20px;
+  margin: 15px;
 }
 
-/* .input-container {
-  width: 100%;
-  height: 100%;
-  color: black;
-  padding-top: 20px;
-  border: none;
-  outline: none;
-  font-size: 25px;
-} */
-
-/* .label-container {
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  font-size: 20px;
-  border-bottom: 0.5px solid gray;
-} */
-
-/* .label-container::after {
-  content: "";
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  height: 100%;
-  width: 100%;
-  border-bottom: 2px solid black;
-  transform: translateX(-101%);
-  transition: all 0.3s ease;
-}
-
-.span-container {
-  position: absolute;
-  bottom: 1px;
-  left: 0px;
-  transition: all 0.3s ease;
-}
-
-.input-container:focus + .label-container .span-container, 
-.input-container:valid + .label-container .span-container{
-  transform: translateY(-100%);
-  left: 0px;
-  font-size: 16px;
-  color: gray;
-}
-
-.input-container:focus + .label-container::after, 
-.input-container:valid + .label-container::after {
-  transform: translateX(0%);
-} */
-
-.readContainer {
-  margin: 20px;
-  margin-top: 40px;
+.formContainer .labelContainer{
+  margin: 5px 0;
   font-size: 20px;
 }
 
-#readInput {
-  margin: 7px;
-  transform: scale(1.5);
+.formContainer .labelContainerRadio{
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.formContainer .inputContainer{
+  width: 90%;
+  padding: 5px;
+  font-size: 15px;
+}
+
+#priorityForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.formContainerRadio {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: 5px 0;
+}
+
+
+
+
+/* .containerRadio input[type="radio"] {
+  display: none;
+}
+
+.containerRadio label {
+  position: relative;
+}
+
+.containerRadio label::before,
+.containerRadio label::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.containerRadio span.radio:hover {
   cursor: pointer;
+}
+.containerRadio span.radio::before {
+  left: -52px;
+  width: 45px;
+  height: 25px;
+  background-color: #A8AAC1;
+  border-radius: 50px;
+}
+.containerRadio span.radio::after {
+  left: -49px;
+  width: 17px;
+  height: 17px;
+  border-radius: 10px;
+  background-color: #6C788A;
+  transition: left .25s, background-color .25s;
+}
+input[type="radio"]:checked + label span.radio::after {
+  left: -27px;
+  background-color: #EBFF43;
+} */
+
+
+
+
+
+.formContainer #notesInputTask{
+  height: 100px;
+  width: 90%;
 }
 
 .submitContainer {
@@ -376,7 +408,7 @@ body {
 }
 
 .submitButton:hover {
-transform: scale(1.1);
-background: black;
-color: white;
+  transform: scale(1.1);
+  background: black;
+  color: white;
 }
