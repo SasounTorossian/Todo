@@ -24,7 +24,7 @@ body {
     
 }
 
-/* CONTENT TEST */
+/* CONTENT */
 #content {
   display: flex;
   height: 100%;
@@ -186,6 +186,11 @@ body {
 
 .titleTask, .titleProject {
   font-size: 20px;
+}
+
+/* Task detail tab */
+.taskDetails{
+  height: 100%;
 }
 
 /* FOOTER */
