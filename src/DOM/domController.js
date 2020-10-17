@@ -98,7 +98,14 @@ const DomController = (() => {
             const containerProj = document.createElement("div") 
             containerProj.classList.add("project")
             containerProj.classList.add("tab")
-            containerProj.addEventListener("click", () => setProject(index))
+            containerProj.addEventListener("click", () => {
+                let highlightedProjects = document.querySelectorAll(".selectedProj")
+                highlightedProjects.forEach(elem => {
+                    elem.classList.remove("selectedProj");
+                });
+                containerProj.classList.add("selectedProj")
+                setProject(index)
+            })
 
             const titleProj = document.createElement("div")
             titleProj.classList.add("titleProject")
@@ -148,15 +155,22 @@ const DomController = (() => {
             const containerTask = document.createElement("div") 
             containerTask.classList.add("task")
             containerTask.classList.add("tab")
-            containerTask.addEventListener("click", () => setTask(index))
+            containerTask.addEventListener("click", () => {
+                let highlightedTasks = document.querySelectorAll(".selectedTask")
+                highlightedTasks.forEach(elem => {
+                    elem.classList.remove("selectedTask");
+                });
+                containerTask.classList.add("selectedTask")
+                setTask(index)
+            })
 
             const titleTask = document.createElement("div")
             titleTask.classList.add("titleTask")
             titleTask.innerText = task.title
-            if(task.priority == 1) titleTask.style.color = "green"
-            else if(task.priority == 2) titleTask.style.color = "orange"
-            else if(task.priority == 3) titleTask.style.color = "red"
-            else titleTask.style.color = "green"
+            // if(task.priority == 1) titleTask.style.color = "green"
+            // else if(task.priority == 2) titleTask.style.color = "orange"
+            // else if(task.priority == 3) titleTask.style.color = "red"
+            // else titleTask.style.color = "green"
             containerTask.appendChild(titleTask)
             
             const editTask = document.createElement("div")
@@ -232,9 +246,18 @@ const DomController = (() => {
         const priorityTaskDetails = document.createElement("div")
         priorityTaskDetails.classList.add("priorityTaskDetails")
         priorityTaskDetails.classList.add("detail")
-        if(task.priority == 1) priorityTaskDetails.innerText = "Low"
-        else if(task.priority == 2) priorityTaskDetails.innerText = "Medium"
-        else if(task.priority == 3) priorityTaskDetails.innerText = "High"
+        if(task.priority == 1) {
+            priorityTaskDetails.innerText = "Low"
+            priorityTaskDetails.style.color = "green"
+        }
+        else if(task.priority == 2) {
+            priorityTaskDetails.innerText = "Medium"
+            priorityTaskDetails.style.color = "orange"
+        }
+        else if(task.priority == 3) {
+            priorityTaskDetails.innerText = "High"
+            priorityTaskDetails.style.color = "red"
+        }
         else priorityTaskDetails.innerText = "Low"
         priorityDetailsContainer.appendChild(priorityTaskDetails)
 

@@ -130,6 +130,10 @@ body {
   transform: scale(1.03);
 }
 
+.selectedProj {
+  background-color: orange;
+}
+
 /* Task tab */
 .task {
   height: 40px;
@@ -188,6 +192,10 @@ body {
 
 .titleTask, .titleProject {
   font-size: 20px;
+}
+
+.selectedTask {
+  background-color: orange;
 }
 
 /* Task detail tab */
