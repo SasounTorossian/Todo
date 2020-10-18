@@ -60,7 +60,7 @@ const modalTask = (() => {
         let notes = document.querySelector("#notesInputTask").value
         closeModal()
         if (!title || !desc || !date || !priority) return
-        emitterTask.emit("submitTask", title, desc, date, priority, notes)
+        emitterTask.emit("addTask", title, desc, date, priority, notes)
     }
 
     return {hideOpenTaskBtn,

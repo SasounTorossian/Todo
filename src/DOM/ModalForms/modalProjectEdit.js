@@ -38,7 +38,7 @@ const modalProjectEdit = (() => {
     function submitModalEdit(){
         let title = document.querySelector("#titleInputProjEdit").value
         closeModalEdit()
-        emitterProjEdit.emit("submitProjEdit", title)
+        emitterProjEdit.emit("editProj", title)
     }
 
     return {openModalEdit}

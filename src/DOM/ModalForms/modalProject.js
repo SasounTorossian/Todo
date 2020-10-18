@@ -44,7 +44,7 @@ const modalProject = (() => {
         let title = document.querySelector("#titleInputProj").value
         if(!title) return
         closeModal()
-        emitterProj.emit("submitProj", title)
+        emitterProj.emit("addProj", title)
     }
 
     return {openModal}

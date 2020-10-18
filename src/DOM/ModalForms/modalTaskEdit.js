@@ -45,7 +45,7 @@ const modalTaskEdit = (() => {
         }
         let notes = document.querySelector("#notesInputTaskEdit").value 
         closeModalEdit()
-        emitterTaskEdit.emit("submitTaskEdit", title, desc, date, priority, notes)
+        emitterTaskEdit.emit("editTask", title, desc, date, priority, notes)
     }
 
     return {openModalEdit}

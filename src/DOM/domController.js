@@ -8,7 +8,6 @@ import {modalTaskEdit} from "./ModalForms/modalTaskEdit"
 import {emitterTaskEdit} from "./ModalForms/modalTaskEdit"
 import {LogicController} from "../Logic/logicController"
 import {Storage} from "../Logic/Storage/storage"
-import {Time} from "../Logic/Time/time"
 import {RenderTabs} from "../DOM/RenderTabs/renderTabs"
 import {emitterRender} from "../DOM/RenderTabs/renderTabs"
 
@@ -22,26 +21,26 @@ const DomController = (() => {
         modalTask.hideOpenTaskBtn()
     }
 
-    emitterProj.on("submitProj", (title) => {
+    emitterProj.on("addProj", (title) => {
         LogicController.addProject(title)
         projectHighlight(currentProjIndex)
         RenderTabs.renderProjects()
     })
 
-    emitterTask.on("submitTask", (title, desc, date, priority, notes) => {
+    emitterTask.on("addTask", (title, desc, date, priority, notes) => {
         const currentProjIndex = LogicController.getCurrentProjectIndex()
         LogicController.addTask(currentProjIndex, title, desc, date, priority, notes)
         RenderTabs.renderTasks()
     })
 
-    emitterProjEdit.on("submitProjEdit", (title) => {
+    emitterProjEdit.on("editProj", (title) => {
         const currentProjIndex = LogicController.getCurrentProjectIndex() 
         LogicController.editProject(currentProjIndex, title)
         RenderTabs.renderProjects()
         projectHighlight(currentProjIndex)
     })
 
-    emitterTaskEdit.on("submitTaskEdit", (title, desc, date, priority, notes) => {
+    emitterTaskEdit.on("editTask", (title, desc, date, priority, notes) => {
         const currentProjIndex = LogicController.getCurrentProjectIndex() 
         const currentTaskIndex = LogicController.getCurrentTaskIndex()
         LogicController.editTask(currentProjIndex, currentTaskIndex, title, desc, date, priority, notes)
@@ -51,11 +50,11 @@ const DomController = (() => {
     })
 
     emitterRender.on("setProj", (index) => {
-        let previousProj = LogicController.getCurrentProject()
-        let currentProj = LogicController.setCurrentProject(index)
+        let nextIndex = LogicController.getCurrentProjectIndex()
+        LogicController.setCurrentProject(index)
         projectHighlight(index)
         modalTask.showOpenTaskBtn()
-        if (previousProj != currentProj) {
+        if (nextIndex != index) {
             RenderTabs.renderTasks()
             RenderTabs.removeAllTasksDetails()
         }
@@ -89,11 +88,11 @@ const DomController = (() => {
     })
 
     const setNextProject = (index) => {
-        let previousProj = LogicController.getCurrentProject()
-        let currentProj = LogicController.setCurrentProject(index)
+        let nextIndex = LogicController.getCurrentProjectIndex()
+        LogicController.setCurrentProject(index)
         projectHighlight(index)
         modalTask.showOpenTaskBtn()
-        if (previousProj != currentProj) {
+        if (nextIndex != index) {
             RenderTabs.renderTasks()
             RenderTabs.removeAllTasksDetails()
         }
@@ -106,18 +105,14 @@ const DomController = (() => {
     }
 
     const projectHighlight = (index) => {
-        let highlightedProjects = document.querySelectorAll(".selectedProj")
-        highlightedProjects.forEach(elem => {
-            elem.classList.remove("selectedProj");
-        });
+        let highlightedProjects = document.querySelector(".selectedProj")
+        if(highlightedProjects) {highlightedProjects.classList.remove("selectedProj")}
         if(index != null) getProjectDom(index).classList.add("selectedProj")
     }
 
     const taskHighlight = (index) => {
-        let highlightedTasks = document.querySelectorAll(".selectedTask")
-        highlightedTasks.forEach(elem => {
-            elem.classList.remove("selectedTask");
-        });
+        let highlightedTasks = document.querySelector(".selectedTask")
+        if(highlightedTasks) {highlightedTasks.classList.remove("selectedTask")}
         if(index != null) getTaskDom(index).classList.add("selectedTask")
     }
 
