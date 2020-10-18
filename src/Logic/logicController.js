@@ -30,13 +30,7 @@ const LogicController = (() => {
 
     const getCurrentProjectIndex = () => projects.findIndex(p => p == currentProj)
 
-    const getNextProjectIndex = (index) => {
-        let nextIdx = projects.length != 0 ? index % projects.length : null
-        return nextIdx
-        // const nextIdx = getCurrentProjectIndex()
-        // return nextIdx
-        // console.log(nextIdx)
-    }
+    const getNextProjectIndex = (index) => projects.length != 0 ? index % projects.length : null
     
     const addTask = (pindex, title, desc, date, priority, notes) => {
         projects[pindex].tasks.push(taskFactory(title, desc, date, priority, notes))
@@ -65,7 +59,7 @@ const LogicController = (() => {
 
     const getCurrentTaskIndex = () => currentProj.tasks.findIndex(p => p == currentTask)
 
-    const getNextTask = () => pass
+    const getNextTaskIndex = (index) => getTasks().length != 0 ? index % getTasks().length : null
 
     return {
         addProject,
@@ -83,7 +77,8 @@ const LogicController = (() => {
         editTask,
         setCurrentTask,
         getCurrentTask,
-        getCurrentTaskIndex
+        getCurrentTaskIndex,
+        getNextTaskIndex
     }
 })()
 

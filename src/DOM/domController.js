@@ -16,6 +16,7 @@ const DomController = (() => {
         LogicController.addProject("A")
         LogicController.addProject("B")
         LogicController.addProject("C")
+        LogicController.addTask(0, "testproj1", "testDesc1", "2020-12-03T09:45", "2", "abc")
         LogicController.addTask(0, "testproj2", "testDesc2", "2020-11-07T08:45", "1", "abc")
         LogicController.addTask(0, "testproj3", "testDesc3", "2020-11-07T08:45", "3", "abc")
         LogicController.addTask(1, "testproj4", "testDesc4", "2020-11-07T08:45", "2", "abc")
@@ -58,9 +59,7 @@ const DomController = (() => {
         renderTasksDetails()
     })
 
-    const removeAllProjects = () => {
-        document.querySelectorAll(".project").forEach(p => p.remove())
-    }
+    const removeAllProjects = () => document.querySelectorAll(".project").forEach(p => p.remove())
 
     const removeAllTasks = () => document.querySelectorAll(".task").forEach(t => t.remove())
 
@@ -90,31 +89,44 @@ const DomController = (() => {
         if(index != null) getProjectDom(index).classList.add("selectedProj")
     }
 
-    const getProjectDom = (index) => document.querySelector(`[index="${index}"]`)
+    const getProjectDom = (index) => document.querySelector(`[projIndex="${index}"]`)
+
+    const deleteProject = (index) => {
+        LogicController.removeProject(index)
+        renderProjects()
+        setNextProject(LogicController.getNextProjectIndex(index))
+    }
 
     const setTask = (index) => {
         LogicController.setCurrentTask(index)
+        taskHighlight(index)
         renderTasksDetails()
     }
 
-    const deleteProject = (index) => {
-        // Clicking delete immidately will not select project. Fix.
-        LogicController.removeProject(index)
-        renderProjects()
-        let nextIdx = LogicController.getNextProjectIndex(index)
-        setNextProject(nextIdx)
-        // LogicController.setCurrentProject(LogicController.getNextProjIndex())
-        // NO. index will not be applicable to project when old one is deleted.  
-        // Project selected (similar to task selected)
+    const setNextTask = (index) => {
+        LogicController.setCurrentTask(index)
+        
+        taskHighlight(index)
+        renderTasksDetails()
     }
 
     const deleteTask = (index) => {
         const currentProjIndex = LogicController.getCurrentProjectIndex()
         LogicController.removeTask(currentProjIndex, index)
         renderTasks()
+        setNextTask(LogicController.getNextTaskIndex(index))
     }
 
-    // TODO: Highlight selected project and task 
+    const taskHighlight = (index) => {
+        let highlightedTasks = document.querySelectorAll(".selectedTask")
+        highlightedTasks.forEach(elem => {
+            elem.classList.remove("selectedTask");
+        });
+        if(index != null) getTaskDom(index).classList.add("selectedTask")
+    }
+
+    const getTaskDom = (index) => document.querySelector(`[taskIndex="${index}"]`)
+
     // TODO: Move render code to separate files. Too intertwined. Can't for now.
 
     const renderProjects = () => {
@@ -124,16 +136,8 @@ const DomController = (() => {
             const containerProj = document.createElement("div") 
             containerProj.classList.add("project")
             containerProj.classList.add("tab")
-            containerProj.setAttribute("index", index)
-            containerProj.addEventListener("click", (e) => {
-                // console.log("TEST")
-                // let highlightedProjects = document.querySelectorAll(".selectedProj")
-                // highlightedProjects.forEach(elem => {
-                //     elem.classList.remove("selectedProj");
-                // });
-                // containerProj.classList.add("selectedProj")
-                setProject(index)
-            })
+            containerProj.setAttribute("projIndex", index)
+            containerProj.addEventListener("click", () => setProject(index))
 
             const titleProj = document.createElement("div")
             titleProj.classList.add("titleProject")
@@ -158,11 +162,6 @@ const DomController = (() => {
             delProj.classList.add("deleteProject")
             delProj.addEventListener("click", (e) => {
                 e.stopPropagation()
-                // let highlightedProjects = document.querySelectorAll(".selectedProj")
-                // highlightedProjects.forEach(elem => {
-                //     elem.classList.remove("selectedProj");
-                // });
-                // containerProj.classList.add("selectedProj")
                 deleteProject(index)
             })
             const delProjImg = document.createElement("img")
@@ -184,26 +183,15 @@ const DomController = (() => {
         Storage.save(LogicController.getProjects())
     } 
 
-    const taskSelected = (e, index) => {
-        let highlightedTasks = document.querySelectorAll(".selectedTask")
-        highlightedTasks.forEach(elem => {
-            elem.classList.remove("selectedTask");
-        });
-        // console.log(e.target)
-        e.target.classList.add("selectedTask")
-        setTask(index)
-    }
-
     const renderTasks = () => {
         removeAllTasks()
-
-        // console.log(LogicController.getTasks())
 
         LogicController.getTasks().forEach((task, index) => {
             const containerTask = document.createElement("div") 
             containerTask.classList.add("task")
             containerTask.classList.add("tab")
-            containerTask.addEventListener("click", (e) => taskSelected(e, index))
+            containerTask.setAttribute("taskIndex", index)
+            containerTask.addEventListener("click", () => setTask(index))
 
             const titleTask = document.createElement("div")
             titleTask.classList.add("titleTask")
@@ -226,7 +214,10 @@ const DomController = (() => {
 
             const delTask = document.createElement("div")
             delTask.classList.add("deleteTask")
-            delTask.addEventListener("click", () => deleteTask(index))
+            delTask.addEventListener("click", (e) => {
+                e.stopPropagation()
+                deleteTask(index)
+            })
             const delTaskImg = document.createElement("img")
             delTaskImg.classList.add("delTaskImg")
             delTaskImg.src = "./images/trash_transparent.png"
