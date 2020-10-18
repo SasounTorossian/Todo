@@ -61,6 +61,18 @@ const LogicController = (() => {
 
     const getNextTaskIndex = (index) => getTasks().length != 0 ? index % getTasks().length : null
 
+    const addDefault = () => {
+        addProject("A")
+        addProject("B")
+        addProject("C")
+        addTask(0, "testproj1", "testDesc1", "2020-12-03T09:45", "2", "abc")
+        addTask(0, "testproj2", "testDesc2", "2020-11-07T08:45", "1", "abc")
+        addTask(0, "testproj3", "testDesc3", "2020-11-07T08:45", "3", "abc")
+        addTask(1, "testproj4", "testDesc4", "2020-11-07T08:45", "2", "abc")
+        addTask(2, "testproj5", "testDesc5", "2020-11-07T08:45", "1", "abc")
+        addTask(2, "testproj6", "testDesc6", "2020-11-07T08:45", "2", "abc")
+    }
+
     return {
         addProject,
         removeProject,
@@ -78,7 +90,8 @@ const LogicController = (() => {
         setCurrentTask,
         getCurrentTask,
         getCurrentTaskIndex,
-        getNextTaskIndex
+        getNextTaskIndex,
+        addDefault
     }
 })()
 
