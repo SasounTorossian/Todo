@@ -10,8 +10,6 @@ import {LogicController} from "../Logic/logicController"
 import {Storage} from "../Logic/Storage/storage"
 import {Time} from "../Logic/Time/time"
 
-// TODO: Style Details.
-
 const DomController = (() => {
     // Should be in storage?, or put in LogicController.addDefault()
     const loadDefault = () => {
@@ -60,7 +58,9 @@ const DomController = (() => {
         renderTasksDetails()
     })
 
-    const removeAllProjects = () => document.querySelectorAll(".project").forEach(p => p.remove())
+    const removeAllProjects = () => {
+        document.querySelectorAll(".project").forEach(p => p.remove())
+    }
 
     const removeAllTasks = () => document.querySelectorAll(".task").forEach(t => t.remove())
 
@@ -68,9 +68,29 @@ const DomController = (() => {
 
     const setProject = (index) => {
         LogicController.setCurrentProject(index)
+        projectHighlight(index)
         modalTask.showOpenTaskBtn()
         renderTasks()
+        removeAllTasksDetails() // Removing even if same project being clicked
     }
+
+    const setNextProject = (index) => {
+        LogicController.setCurrentProject(index)
+        projectHighlight(index)
+        modalTask.showOpenTaskBtn()
+        renderTasks()
+        removeAllTasksDetails() // Removing even if same project being clicked
+    }
+
+    const projectHighlight = (index) => {
+        let highlightedProjects = document.querySelectorAll(".selectedProj")
+        highlightedProjects.forEach(elem => {
+            elem.classList.remove("selectedProj");
+        });
+        if(index != null) getProjectDom(index).classList.add("selectedProj")
+    }
+
+    const getProjectDom = (index) => document.querySelector(`[index="${index}"]`)
 
     const setTask = (index) => {
         LogicController.setCurrentTask(index)
@@ -78,8 +98,14 @@ const DomController = (() => {
     }
 
     const deleteProject = (index) => {
+        // Clicking delete immidately will not select project. Fix.
         LogicController.removeProject(index)
         renderProjects()
+        let nextIdx = LogicController.getNextProjectIndex(index)
+        setNextProject(nextIdx)
+        // LogicController.setCurrentProject(LogicController.getNextProjIndex())
+        // NO. index will not be applicable to project when old one is deleted.  
+        // Project selected (similar to task selected)
     }
 
     const deleteTask = (index) => {
@@ -98,12 +124,14 @@ const DomController = (() => {
             const containerProj = document.createElement("div") 
             containerProj.classList.add("project")
             containerProj.classList.add("tab")
-            containerProj.addEventListener("click", () => {
-                let highlightedProjects = document.querySelectorAll(".selectedProj")
-                highlightedProjects.forEach(elem => {
-                    elem.classList.remove("selectedProj");
-                });
-                containerProj.classList.add("selectedProj")
+            containerProj.setAttribute("index", index)
+            containerProj.addEventListener("click", (e) => {
+                // console.log("TEST")
+                // let highlightedProjects = document.querySelectorAll(".selectedProj")
+                // highlightedProjects.forEach(elem => {
+                //     elem.classList.remove("selectedProj");
+                // });
+                // containerProj.classList.add("selectedProj")
                 setProject(index)
             })
 
@@ -128,7 +156,15 @@ const DomController = (() => {
 
             const delProj = document.createElement("div")
             delProj.classList.add("deleteProject")
-            delProj.addEventListener("click", () => deleteProject(index))
+            delProj.addEventListener("click", (e) => {
+                e.stopPropagation()
+                // let highlightedProjects = document.querySelectorAll(".selectedProj")
+                // highlightedProjects.forEach(elem => {
+                //     elem.classList.remove("selectedProj");
+                // });
+                // containerProj.classList.add("selectedProj")
+                deleteProject(index)
+            })
             const delProjImg = document.createElement("img")
             delProjImg.classList.add("delProjImg")
             delProjImg.src = "./images/trash_transparent.png"
@@ -148,29 +184,30 @@ const DomController = (() => {
         Storage.save(LogicController.getProjects())
     } 
 
+    const taskSelected = (e, index) => {
+        let highlightedTasks = document.querySelectorAll(".selectedTask")
+        highlightedTasks.forEach(elem => {
+            elem.classList.remove("selectedTask");
+        });
+        // console.log(e.target)
+        e.target.classList.add("selectedTask")
+        setTask(index)
+    }
+
     const renderTasks = () => {
         removeAllTasks()
+
+        // console.log(LogicController.getTasks())
 
         LogicController.getTasks().forEach((task, index) => {
             const containerTask = document.createElement("div") 
             containerTask.classList.add("task")
             containerTask.classList.add("tab")
-            containerTask.addEventListener("click", () => {
-                let highlightedTasks = document.querySelectorAll(".selectedTask")
-                highlightedTasks.forEach(elem => {
-                    elem.classList.remove("selectedTask");
-                });
-                containerTask.classList.add("selectedTask")
-                setTask(index)
-            })
+            containerTask.addEventListener("click", (e) => taskSelected(e, index))
 
             const titleTask = document.createElement("div")
             titleTask.classList.add("titleTask")
             titleTask.innerText = task.title
-            // if(task.priority == 1) titleTask.style.color = "green"
-            // else if(task.priority == 2) titleTask.style.color = "orange"
-            // else if(task.priority == 3) titleTask.style.color = "red"
-            // else titleTask.style.color = "green"
             containerTask.appendChild(titleTask)
             
             const editTask = document.createElement("div")
