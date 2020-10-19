@@ -10,6 +10,7 @@ import {LogicController} from "../Logic/logicController"
 import {Storage} from "../Logic/Storage/storage"
 import {RenderTabs} from "../DOM/RenderTabs/renderTabs"
 import {emitterRender} from "../DOM/RenderTabs/renderTabs"
+import { taskFactory } from "../Logic/factory"
 
 // Responsible for manipulating DOM elements, and linking various rendering modules and logic controller together.
 const DomController = (() => {
@@ -153,13 +154,11 @@ const DomController = (() => {
         setNextTask(LogicController.getNextTaskIndex(index))
     })
 
-    /**
-     * 
-     * @param {index of next project} index 
-     * 
-     * Uses index of next project to set it as the current project
+    /** Uses index of next project to set it as the current project
      * upon deletion of the previous project. If different project,
      * re-render tasks and remove task details.
+     * 
+     * @param {index of next project} index 
      */
     const setNextProject = (index) => {
         let nextIndex = LogicController.getCurrentProjectIndex()
@@ -172,13 +171,11 @@ const DomController = (() => {
         }
     }
 
-    /**
-     * 
-     * @param {index of next task} index 
-     * 
-     * Uses index of next task to set it as the current task
+    /** Uses index of next task to set it as the current task
      * upon deletion of previous task.
      * Render task details.
+     * 
+     * @param {index of next task} index 
      */
     const setNextTask = (index) => {
         LogicController.setCurrentTask(index)
@@ -186,13 +183,11 @@ const DomController = (() => {
         RenderTabs.renderTasksDetails()
     }
 
-    /**
-     * 
-     * @param {index of project to highlight} index 
-     * 
-     * Find element with "selectedProj" class and remove class if they exist.
+    /** Find element with "selectedProj" class and remove class if they exist.
      * Get the dom element with corresponding index and apply "selectedProj" class to it.
      * Check if index is null, incase it is the final project and there is no next-project. 
+     * 
+     * @param {index of project to highlight} index 
      */
     const projectHighlight = (index) => {
         let highlightedProjects = document.querySelector(".selectedProj")
@@ -200,13 +195,11 @@ const DomController = (() => {
         if(index != null) getProjectDom(index).classList.add("selectedProj")
     }
 
-    /**
-     * 
-     * @param {index of task to highlight} index 
-     * 
-     * Find element with "selectedTask" class and remove class if they exist.
+    /** Find element with "selectedTask" class and remove class if they exist.
      * Get the dom element with corresponding index and apply "selectedTask" class to it.
      * Check if index is null, incase it is the final task and there is no next-task. } index 
+     * 
+     * @param {index of task to highlight} index 
      */
     const taskHighlight = (index) => {
         let highlightedTasks = document.querySelector(".selectedTask")

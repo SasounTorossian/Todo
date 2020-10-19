@@ -1,14 +1,13 @@
-import {projectFactory} from "./factory"
-import {taskFactory} from "./factory"
+import {Factory} from "./factory"
 
 const LogicController = (() => {
     let projects = []
     let currentProj = null
     let currentTask = null
 
-    const addProject = (title) => projects.push(projectFactory(title))
+    const addProject = (title) => projects.push(Factory.projectFactory(title))
 
-    const addTask = (indexP, title, desc, date, priority, notes) => projects[indexP].tasks.push(taskFactory(title, desc, date, priority, notes))
+    const addTask = (indexP, title, desc, date, priority, notes) => projects[indexP].tasks.push(Factory.taskFactory(title, desc, date, priority, notes))
 
     const editProject = (index, title) => {
         if(title) projects[index].title = title
