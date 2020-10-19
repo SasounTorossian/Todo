@@ -201,6 +201,8 @@ body {
 /* Task detail tab */
 .taskDetails{
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .row {
@@ -209,10 +211,15 @@ body {
   margin: 15px 0;
 }
 
+.fourthRow {
+  flex: 1;
+}
+
 .detailsContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   margin: 0 5px;
 }
 
@@ -233,7 +240,7 @@ body {
 }
 
 .notesTaskDetail {
-  height: 150px;
+  height: 100%;
   text-align: left;
 }
 
