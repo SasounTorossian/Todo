@@ -1,6 +1,7 @@
 const EventEmitter = require("events")
 const emitterTask = new EventEmitter
 
+// Responsible for manipulating "Add Task" modal form
 const modalTask = (() => {
     // Get modal element
     const modal = document.querySelector("#modalTask")
@@ -48,12 +49,13 @@ const modalTask = (() => {
 
 
 
-    // Function to submit modal form and create new book
+    // Function to emit addTask signal for listeniner in domController.js file
     function submitModal(){
         let title = document.querySelector("#titleInputTask").value
         let desc = document.querySelector("#descInputTask").value
         let date = document.querySelector("#dateInputTask").value
         let priority = ""
+        // If "priority" radio tab selected, get value. If not, leave as blank 
         for (const pt of document.querySelectorAll("input[name='priorityTask']")) {
             if(pt.checked) priority = pt.value
         }

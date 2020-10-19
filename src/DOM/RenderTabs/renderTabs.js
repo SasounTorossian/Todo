@@ -5,13 +5,19 @@ import {Time} from "../../Logic/Time/time"
 const EventEmitter = require("events")
 const emitterRender = new EventEmitter
 
+// Responsible for rendering the Project, Tab, and Tab Details columns on the main page.
 const RenderTabs = (() => {
+
+    // Removes all project tabs from dom
     const removeAllProjects = () => document.querySelectorAll(".project").forEach(p => p.remove())
 
+    // Removes all task tabs from dom
     const removeAllTasks = () => document.querySelectorAll(".task").forEach(t => t.remove())
 
+    // Removes all task details from dom
     const removeAllTasksDetails = () => document.querySelectorAll(".taskDetails").forEach(td => td.remove())
 
+    // Renders all projects and adds emitters to buttons. Deletes existing projects first. Saves results once finished.
     const renderProjects = () => {
         removeAllProjects()
 
@@ -70,6 +76,7 @@ const RenderTabs = (() => {
         Storage.save(LogicController.getProjects())
     } 
 
+    // Renders all tasks and adds emitters to buttons. Deletes existing tasks first. Saves results once finished.
     const renderTasks = () => {
         removeAllTasks()
         LogicController.getTasks().forEach((task, index) => {
@@ -126,6 +133,7 @@ const RenderTabs = (() => {
         Storage.save(LogicController.getProjects())
     }
 
+    // Renders details of current task. Deletes details first. Saves results once finished.
     const renderTasksDetails = () => {
         removeAllTasksDetails()
         const task = LogicController.getCurrentTask()
@@ -134,7 +142,8 @@ const RenderTabs = (() => {
         const containerTaskDetails = document.createElement("div") 
         containerTaskDetails.classList.add("taskDetails")
 
-        // First Row
+        // First row
+        // First row - Title
         const titleDetailsContainer = document.createElement("div")
         titleDetailsContainer.classList.add("detailsContainer")
 
@@ -151,6 +160,7 @@ const RenderTabs = (() => {
         titleTaskDetails.innerText = task.title
         titleDetailsContainer.appendChild(titleTaskDetails)
 
+        // First row - Priority
         const priorityDetailsContainer = document.createElement("div")
         priorityDetailsContainer.classList.add("detailsContainer")
 
@@ -187,6 +197,7 @@ const RenderTabs = (() => {
         containerTaskDetails.appendChild(firstRow)
 
         // Second Row
+        // Second Row - Details
         const descDetailsContainer = document.createElement("div")
         descDetailsContainer.classList.add("detailsContainer")
 
@@ -210,6 +221,7 @@ const RenderTabs = (() => {
         containerTaskDetails.appendChild(secondRow)
 
         // Third Row
+        // Third Row - Due Date
         const dateDetailsContainer = document.createElement("div")
         dateDetailsContainer.classList.add("detailsContainer")
 
@@ -226,7 +238,7 @@ const RenderTabs = (() => {
         dateTaskDetails.innerText = Time.getDate(task.date)
         dateDetailsContainer.appendChild(dateTaskDetails)
 
-        /////
+        // Third Row - Due Time
         const timeDetailsContainer = document.createElement("div")
         timeDetailsContainer.classList.add("detailsContainer")
 
@@ -243,7 +255,7 @@ const RenderTabs = (() => {
         timeTaskDetails.innerText = Time.getTime(task.date)
         timeDetailsContainer.appendChild(timeTaskDetails)
 
-        /////
+        // Third Row - Time Left
         const timeLeftDetailsContainer = document.createElement("div")
         timeLeftDetailsContainer.classList.add("detailsContainer")
 
@@ -262,7 +274,6 @@ const RenderTabs = (() => {
         else timeLeftTaskDetails.innerText = timeDiff
         timeLeftDetailsContainer.appendChild(timeLeftTaskDetails)
 
-        /////
         const thirdRow = document.createElement("div")
         thirdRow.classList.add("thirdRow")
         thirdRow.classList.add("row")
@@ -272,6 +283,7 @@ const RenderTabs = (() => {
         containerTaskDetails.appendChild(thirdRow)
 
         // Fourth Row
+        // Fourth Row - Notes
         const notesDetailsContainer = document.createElement("div")
         notesDetailsContainer.classList.add("detailsContainer")
 

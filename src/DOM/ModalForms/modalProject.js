@@ -1,6 +1,7 @@
 const EventEmitter = require("events")
 const emitterProj = new EventEmitter
 
+// Responsible for manipulating "Add Project" modal form
 const modalProject = (() => {
     // Get modal element
     const modal = document.querySelector("#modalProj")
@@ -39,7 +40,7 @@ const modalProject = (() => {
         if(e.target == modal) closeModal()
     }
 
-    // Function to submit modal form and create new book
+    // Function to emit addProj signal for listeniner in domController.js file
     function submitModal(){
         let title = document.querySelector("#titleInputProj").value
         if(!title) return
