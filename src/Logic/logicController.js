@@ -70,15 +70,15 @@ const LogicController = (() => {
 
     // If no saved projects exist, load the default projects and tasks for display purposes.
     const addDefault = () => {
-        addProject("A")
-        addProject("B")
-        addProject("C")
-        addTask(0, "testproj1", "testDesc1", "2020-12-03T09:45", "2", "abc")
-        addTask(0, "testproj2", "testDesc2", "2020-11-07T08:45", "1", "abc")
-        addTask(0, "testproj3", "testDesc3", "2020-11-07T08:45", "3", "abc")
-        addTask(1, "testproj4", "testDesc4", "2020-11-07T08:45", "2", "abc")
-        addTask(2, "testproj5", "testDesc5", "2020-11-07T08:45", "1", "abc")
-        addTask(2, "testproj6", "testDesc6", "2020-11-07T08:45", "2", "abc")
+        addProject("Groceries")
+        addProject("UFC 254")
+        addProject("Study")
+        addTask(0, "Buy milk", "Get full fat", "2020-10-03T10:00", "1", "Might have to get 2-3 for next week too.")
+        addTask(0, "Buy eggs", "Get 12", "2020-10-07T10:00", "1", "Try to use free-range.")
+        addTask(0, "Buy apples", "Preferably green", "2020-10-07T10:00", "1", "Could also get more for apple pie.")
+        addTask(1, "Watch", "Go to friends house", "2020-10-23T15:15", "3", "Take a couple beers to friend's house too.")
+        addTask(2, "Javascript", "Arrow functions", "2020-11-07T08:45", "2", "Read MDN docs on arrow functions. Make notes on it too.")
+        addTask(2, "CSS", "Display properties", "2020-11-07T09:45", "1", "Read and understand different css display property settings, and their interaction with other elements.")
     }
 
     return {
