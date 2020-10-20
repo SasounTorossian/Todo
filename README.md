@@ -1,5 +1,5 @@
 # Todo
-To do app based off Odin Project curriculum. Allows users to create, edit, and delete projects, which each contain tasks. Task details on final column show title, description, priority, due date, due time, time left, and notes. Live demo can be found on github.io [here](https://sasountorossian.github.io/Todo/)
+To do app based off Odin Project curriculum. Allows users to create, edit, and delete projects, which each contain tasks. Task details on final column show title, description, priority, due date, due time, time left, and notes. Live demo can be found on github.io [here](https://sasountorossian.github.io/Todo/).
 
 ![myTodo demonstration](myTodo.gif)
 
