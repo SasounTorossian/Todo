@@ -34,6 +34,7 @@ const DomController = (() => {
      * Adds project, highlights newly added project, then renders all projects.
      */
     emitterProj.on("addProj", (title) => {
+        const currentProjIndex = LogicController.getCurrentProjectIndex()
         LogicController.addProject(title)
         projectHighlight(currentProjIndex)
         RenderTabs.renderProjects()
